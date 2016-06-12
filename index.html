@@ -37,46 +37,50 @@
 <li>9 掌握嵌入式板卡和PC建立文件共享的方式；</li>
 <li>10 寻找和安装交叉编译环境，理解交叉编译；</li>
 <li>11 熟悉嵌入式板卡的Linux下的编程环境；</li>
-<li>12 了解远程访问嵌入式板卡图形桌面的方式。</li>
+<li>12 了解远程访问嵌入式板卡图形桌面的方式。<br>
+</li>
 </ul>
 
 <h4>
 <a id="二-实验器材" class="anchor" href="#%E4%BA%8C-%E5%AE%9E%E9%AA%8C%E5%99%A8%E6%9D%90" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>二 实验器材</h4>
 
 <ul>
-<li>1 硬件
-实验主板一块；
-5V/1A电源一个；
-microUSB线一根；
-USB-TTL串口线一根（FT232RL芯片或PL2303芯片）。
-以下为自备（可选）器材：
-PC（Windows/Mac OS/Linux）一台；
-以太网线一根（可能还需要路由器等）；
-HDMI显示器；
-HDMI线；
-USB键盘/鼠标（无线）；
-USB Hub，推荐自带供电的类型。</li>
-<li>2 软件
-PC上的USB-TTL串口线配套的驱动程序；
-PC上的串口终端软件，如minicom、picocom、putty等；
-PC上的SSH软件，如putty等。
-交叉编译软件。</li>
+<li>1 硬件<br>
+实验主板一块；<br>
+5V/1A电源一个；<br>
+microUSB线一根；<br>
+USB-TTL串口线一根（FT232RL芯片或PL2303芯片）。<br>
+以下为自备（可选）器材：<br>
+PC（Windows/Mac OS/Linux）一台；<br>
+以太网线一根（可能还需要路由器等）；<br>
+HDMI显示器；<br>
+HDMI线；<br>
+USB键盘/鼠标（无线）；<br>
+USB Hub，推荐自带供电的类型。<br>
+</li>
+<li>2 软件<br>
+PC上的USB-TTL串口线配套的驱动程序；<br>
+PC上的串口终端软件，如minicom、picocom、putty等；<br>
+PC上的SSH软件，如putty等。<br>
+交叉编译软件。<br>
+</li>
 </ul>
 
 <h4>
 <a id="三-实验过程和数据记录" class="anchor" href="#%E4%B8%89-%E5%AE%9E%E9%AA%8C%E8%BF%87%E7%A8%8B%E5%92%8C%E6%95%B0%E6%8D%AE%E8%AE%B0%E5%BD%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>三 实验过程和数据记录</h4>
 
 <ul>
-<li>1 在PC上安装好USB串口驱动和串口终端软件；
+<li>1 在PC上安装好USB串口驱动和串口终端软件；<br>
 <img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146573346178.png" alt="1.1">
 <img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146573346217.png" alt="1.2">
 </li>
-<li>2 按照图纸要求，将USB串口线与WRTnode连接好，并连接好以太网（如果打算采用WiFi，可不连接以太网）。
+<li>2 按照图纸要求，将USB串口线与WRTnode连接好，并连接好以太网（如果打算采用WiFi，可不连接以太网）。<br>
 <img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146573346259.png" alt="1.3">
 <img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146573346328.png" alt="1.4">
 </li>
-<li>3 给WRTnode上电，记录启动过程的输出；
-启动过程输出：</li>
+<li>3 给WRTnode上电，记录启动过程的输出；<br>
+启动过程输出：<br>
+</li>
 </ul>
 
 <pre><code>U-Boot 1.1.3 - Modified by Manfeel (Jul  8 2014 - 18:53:13)
@@ -520,48 +524,58 @@ Initialize RF Central Registers for E2 !!!
 procd: - init complete -
 </code></pre>
 
-<p>4 从终端登陆WRTnode的Linux，配置网络和/或WiFi，从WRTnode和PC两端证明网络已连接；
+<ul>
+<li>4 从终端登陆WRTnode的Linux，配置网络和/或WiFi，从WRTnode和PC两端证明网络已连接；<br>
 <img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146573346368.png" alt="1.5">
 <img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146573346417.png" alt="1.6">
-5 配置WRTnode的SSH，可尝试采用各种不同的认证方式；
-WRTnode的SSH在初始化的时候已经自动配置。
-6 从PC通过SSH登陆WRTnode；
+</li>
+<li>5 配置WRTnode的SSH，可尝试采用各种不同的认证方式；<br>
+WRTnode的SSH在初始化的时候已经自动配置。<br>
+</li>
+<li>6 从PC通过SSH登陆WRTnode；<br>
 <img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146573346481.png" alt="1.7">
-7 看到多个不同端口的登陆（本机键盘/屏幕、串口和SSH），并运用Linux的write来互相通信。
-WRTnode上的linux属于精简版linux，没有找到查看当前在线用户的相关命令。如果安装nmap套件，剩余空间不足。
-8 配置嵌入式板卡上的SAMBA客户端，使它能访问PC上共享的目录；
+</li>
+<li>7 看到多个不同端口的登陆（本机键盘/屏幕、串口和SSH），并运用Linux的write来互相通信。<br>
+WRTnode上的linux属于精简版linux，没有找到查看当前在线用户的相关命令。如果安装nmap套件，剩余空间不足。<br>
+</li>
+<li>8 配置嵌入式板卡上的SAMBA客户端，使它能访问PC上共享的目录；<br>
 <img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146573346535.png" alt="1.8">
-9 尝试各种与嵌入式板卡传递文件的方式并做比较：
-Sftp传输测试：
+</li>
+<li>9 尝试各种与嵌入式板卡传递文件的方式并做比较：<br>
+Sftp传输测试：<br>
 <img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146573346597.png" alt="1.9">
-在传输大文件时，有时会卡住无法继续传输，传输速度尚可。
-SSH传输测试：
-传输较稳定，速度平均为128KB/s。
-10 选择和安装PC上的交叉编译环境；
-在linux下，下载WRTnode帮助页面中提供的SDK，配置$PATH与$STAGING_DIR:</p>
+在传输大文件时，有时会卡住无法继续传输，传输速度尚可。<br>
+SSH传输测试：<br>
+传输较稳定，速度平均为128KB/s。<br>
+</li>
+<li>10 选择和安装PC上的交叉编译环境；<br>
+在linux下，下载WRTnode帮助页面中提供的SDK，配置$PATH与$STAGING_DIR:<br>
+</li>
+</ul>
 
 <pre><code>export PATH="/home/lincoln/WRTnode_sdk/toolchain/bin:$PATH"
 export STAGING_DIR="/home/lincoln/WRTnode_sdk/toolchain/bin:$STAGING_DIR"
 </code></pre>
 
-<p><img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146573346656.png" alt="1.10">
-11 交叉编译C语言的浮点运算程序到WRTnode上去运行，证明所编译的程序是MIPS的；
-程序运行结果：
+<p><img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146573346656.png" alt="1.10"></p>
+
+<ul>
+<li>11 交叉编译C语言的浮点运算程序到WRTnode上去运行，证明所编译的程序是MIPS的；<br>
+程序运行结果：<br>
 <img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146573346695.png" alt="1.11">
-程序源代码：
+程序源代码：<br>
 <img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/14657334675.png" alt="1.12">
-十六进制查看：
+十六进制查看：<br>
 <img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146573346803.png" alt="1.13">
-从000012b0位置可以看到，链接的库是mips的，因此此段程序应当是mips程序。同时，在WRTnode上能够运行，因此应当是mips程序。
-12尝试嵌入式板卡上的三个语言的开发环境：C/C++、Python和Java；
-WRTnode板卡上没有找到上述语言的开发环境，只能通过交叉编译运行。
-13尝试一种从PC远程访问嵌入式板卡图形桌面的方式：x-window（通过SSH）、RDP或VNC。
-WRTnode暂无支持的图形桌面。</p>
-
-<h4>
-<a id="四-讨论与心得" class="anchor" href="#%E5%9B%9B-%E8%AE%A8%E8%AE%BA%E4%B8%8E%E5%BF%83%E5%BE%97" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>四 讨论与心得</h4>
-
-<p>通过这次的实验，我对于嵌入式开发有了一个从无到有的认识，虽然目前还只是初步的学习，不过已经了解了开发板与开发机之间的通信、文件传输、交叉编译等知识。不过由于我分配到的是WRTnode，这块板子以轻量化著称，因此也牺牲了许多其他的功能，比如说各种各样的编译器。同时，由于WRTnode上的存储空间较小（64Mb），除去操作系统等必要组件之后，剩余的空间已经很小了，因此也不太可能把安装各种各样的开发环境。这样也会导致基于WRTnode开发程序相对困难一些。</p>
+从000012b0位置可以看到，链接的库是mips的，因此此段程序应当是mips程序。同时，在WRTnode上能够运行，因此应当是mips程序。<br>
+</li>
+<li>12 尝试嵌入式板卡上的三个语言的开发环境：C/C++、Python和Java；
+WRTnode板卡上没有找到上述语言的开发环境，只能通过交叉编译运行。</li>
+<li>13 尝试一种从PC远程访问嵌入式板卡图形桌面的方式：x-window（通过SSH）、RDP或VNC。
+WRTnode暂无支持的图形桌面。<br>
+#### 四 讨论与心得<br>
+通过这次的实验，我对于嵌入式开发有了一个从无到有的认识，虽然目前还只是初步的学习，不过已经了解了开发板与开发机之间的通信、文件传输、交叉编译等知识。不过由于我分配到的是WRTnode，这块板子以轻量化著称，因此也牺牲了许多其他的功能，比如说各种各样的编译器。同时，由于WRTnode上的存储空间较小（64Mb），除去操作系统等必要组件之后，剩余的空间已经很小了，因此也不太可能把安装各种各样的开发环境。这样也会导致基于WRTnode开发程序相对困难一些。</li>
+</ul>
 
 <h2>
 <a id="嵌入式实验三" class="anchor" href="#%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AE%9E%E9%AA%8C%E4%B8%89" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>嵌入式实验三</h2>
@@ -569,43 +583,86 @@ WRTnode暂无支持的图形桌面。</p>
 <h4>
 <a id="一-实验目的和要求-1" class="anchor" href="#%E4%B8%80-%E5%AE%9E%E9%AA%8C%E7%9B%AE%E7%9A%84%E5%92%8C%E8%A6%81%E6%B1%82-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>一 实验目的和要求</h4>
 
-<p>1.1理解MCU上电启动过程；
-1.2掌握使用Cube库来编写STM32裸机程序的方法；
-1.3掌握使用Cube库来编写GPIO和UART程序的方法；
-1.4掌握使用Cube库来编写中断响应程序的方法；
-1.5理解前后台程序模式；
-1.6掌握在STM32F103上编写裸机程序并下载运行的方法。</p>
+<ul>
+<li>1 理解MCU上电启动过程；<br>
+</li>
+<li>2 掌握使用Cube库来编写STM32裸机程序的方法；<br>
+</li>
+<li>3 掌握使用Cube库来编写GPIO和UART程序的方法；<br>
+</li>
+<li>4掌握使用Cube库来编写中断响应程序的方法；<br>
+</li>
+<li>5理解前后台程序模式；<br>
+</li>
+<li>6掌握在STM32F103上编写裸机程序并下载运行的方法。<br>
+</li>
+</ul>
 
 <h4>
 <a id="二-实验器材-1" class="anchor" href="#%E4%BA%8C-%E5%AE%9E%E9%AA%8C%E5%99%A8%E6%9D%90-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>二 实验器材</h4>
 
-<p>2.1 硬件
-STM32F103核心板板一块；
-microUSB线一根（供电）；
-STLink板或USB串口板一块。
-2.2 软件
-交叉编译软件。</p>
+<ul>
+<li>1 硬件<br>
+STM32F103核心板板一块；<br>
+microUSB线一根（供电）；<br>
+STLink板或USB串口板一块。<br>
+</li>
+<li>2 软件<br>
+交叉编译软件。<br>
+</li>
+</ul>
 
 <h4>
 <a id="三-实验过程和数据记录-1" class="anchor" href="#%E4%B8%89-%E5%AE%9E%E9%AA%8C%E8%BF%87%E7%A8%8B%E5%92%8C%E6%95%B0%E6%8D%AE%E8%AE%B0%E5%BD%95-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>三 实验过程和数据记录</h4>
 
-<p>3.1编写Cube程序，配置UART1为9600,8n1，上电后向串口输出“Hello”，在PC上通过串口软件观察结果.
-3.2通过面包板在PA11和PA12各连接一个按钮开关到地；
-3.3编写Cube程序，配置PA11和PA12为内部上拉到输入模式，在main()函数循环检测PA11按钮按下，并在按钮按下时 在串口输出“Pressed”
-3.4编写Cube程序，配置PA12下降沿触发中断，程序中设置两个全局变量，一个为计数器，一个为标识。当中断触发 时，计数器加1，并设置标识。在主循环中判断标识，如果标识置位则清除标识并通过串口输出计数值；
-3.5编写Cube程序，开启定时器为200ms中断一次，中断触发时设置标识，主循环根据这个标识来做串口输出（取消4 的串口输出）；
-3.6编写完整的码表程序，PA12的按钮表示车轮转了一圈，通过计数器可以得到里程，通过定时器中断得到的时间可以计算出速度；PA11的按钮切换模式，模式一在串口输出里程，模式二在串口输出速度。
-拓展内容:
-1 PA11的按钮也采用中断方式检测，主程序只检测标识做串口发送；
-2 在主循环中加入休眠，由定时器中断退出休眠；
-3 串口发送采用中断模式，由定时器中断程序启动串口发送，发送遇到字符串结尾停止；主程序在配置完成后始终休眠。
-3.7代码分析：
-Main函数部分:
-    主要完成UART、GPIO、TIMER的初始化、输出欢迎信息，以及主循环。
-    时钟与GPIO中断处理函数：
-    时钟与GPIO中断回调函数：
-    辅助函数：
-    Num2str函数负责将数字转化为字符串，printResult负责根据目前状态输出结果</p>
+<ul>
+<li>1 编写Cube程序，配置UART1为9600,8n1，上电后向串口输出“Hello”，在PC上通过串口软件观察结果.<br>
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146574305527.png" alt="2.1">
+</li>
+<li>2 通过面包板在PA11和PA12各连接一个按钮开关到地；<br>
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/14657430559.png" alt="2.2">
+</li>
+<li>3 编写Cube程序，配置PA11和PA12为内部上拉到输入模式，在main()函数循环检测PA11按钮按下，并在按钮按下时 在串口输出“Pressed”<br>
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146574305631.png" alt="2.3">
+</li>
+<li>4 编写Cube程序，配置PA12下降沿触发中断，程序中设置两个全局变量，一个为计数器，一个为标识。当中断触发 时，计数器加1，并设置标识。在主循环中判断标识，如果标识置位则清除标识并通过串口输出计数值；<br>
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146574305666.png" alt="2.4">
+</li>
+<li>5 编写Cube程序，开启定时器为200ms中断一次，中断触发时设置标识，主循环根据这个标识来做串口输出（取消4 的串口输出）;<br>
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146574305704.png" alt="2.5">
+</li>
+<li>6 编写完整的码表程序，PA12的按钮表示车轮转了一圈，通过计数器可以得到里程，通过定时器中断得到的时间可以计算出速度；PA11的按钮切换模式，模式一在串口输出里程，模式二在串口输出速度。<br>
+</li>
+<li>7 PA11的按钮也采用中断方式检测，主程序只检测标识做串口发送；<br>
+</li>
+<li>8 在主循环中加入休眠，由定时器中断退出休眠；<br>
+</li>
+<li>9 串口发送采用中断模式，由定时器中断程序启动串口发送，发送遇到字符串结尾停止；主程序在配置完成后始终休眠。<br>
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146574305744.png" alt="2.6"><br>
+</li>
+</ul>
+
+<h4>
+<a id="四-代码分析" class="anchor" href="#%E5%9B%9B-%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>四 代码分析：</h4>
+
+<ul>
+<li>Main函数部分:<br>
+主要完成UART、GPIO、TIMER的初始化、输出欢迎信息，以及主循环。<br>
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146574305786.png" alt="2.7">
+</li>
+<li>时钟与GPIO中断处理函数：<br>
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146574305825.png" alt="2.8">
+</li>
+<li>时钟与GPIO中断回调函数：<br>
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146574305863.png" alt="2.9">
+</li>
+<li>辅助函数：<br>
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146574305897.png" alt="2.10">
+</li>
+<li>Num2str函数负责将数字转化为字符串，printResult负责根据目前状态输出结果<br>
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146574305978.png" alt="2.11"><br>
+</li>
+</ul>
 
 <h2>
 <a id="嵌入式实验四" class="anchor" href="#%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AE%9E%E9%AA%8C%E5%9B%9B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>嵌入式实验四</h2>
@@ -613,59 +670,79 @@ Main函数部分:
 <h4>
 <a id="一-实验目的和要求-2" class="anchor" href="#%E4%B8%80-%E5%AE%9E%E9%AA%8C%E7%9B%AE%E7%9A%84%E5%92%8C%E8%A6%81%E6%B1%82-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>一 实验目的和要求</h4>
 
-<p>1.1 理解uboot等bootloader的一般功能和基本工作原理；
-1.2掌握在STM32F103上编写裸机程序并下载运行的方法。</p>
+<p>1.1 理解uboot等bootloader的一般功能和基本工作原理；<br>
+1.2掌握在STM32F103上编写裸机程序并下载运行的方法。  </p>
 
 <h4>
 <a id="二-实验器材-2" class="anchor" href="#%E4%BA%8C-%E5%AE%9E%E9%AA%8C%E5%99%A8%E6%9D%90-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>二 实验器材</h4>
 
-<p>2.1 硬件
-STM32F103核心板板一块；
-microUSB线一根（供电）；
-STLink板或USB串口板一块。
-2.2 软件
-交叉编译软件。</p>
+<p>2.1 硬件  </p>
 
-<h4>
-<a id="三-实验过程和数据记录-2" class="anchor" href="#%E4%B8%89-%E5%AE%9E%E9%AA%8C%E8%BF%87%E7%A8%8B%E5%92%8C%E6%95%B0%E6%8D%AE%E8%AE%B0%E5%BD%95-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>三 实验过程和数据记录</h4>
+<ul>
+<li>STM32F103核心板板一块；<br>
+</li>
+<li>microUSB线一根（供电）；<br>
+</li>
+<li>STLink板或USB串口板一块。<br>
+2.2 软件<br>
+</li>
+<li>交叉编译软件。<br>
+#### 三 实验过程和数据记录<br>
+</li>
+<li>写一个自己的简易bootloader，能通过串口执行两条最简单的指令：<br>
 
-<p>3.1 写一个自己的简易bootloader，能通过串口执行两条最简单的指令：
-3.1.1 peek addr 以一个字为单位读取内存中 addr 位置的数据(addr是4字节对齐,十六进制的 形式,长度为8位十六进制,例如 0x00008000),并以十六进制的形式输出
-3.1.2poke addr data 以一个字为单位修改内存中 addr 位置的数据为 data(addr 是 4 字节对齐,十六进制的形式,长度为 8位十六进制, data 也是十六进制的形式,长度为8位十六进制)
-程序执行结果:</p>
+<ul>
+<li>peek addr 以一个字为单位读取内存中 addr 位置的数据(addr是4字节对齐,十六进制的 形式,长度为8位十六进制,例如 0x00008000),并以十六进制的形式输出<br>
+</li>
+<li>poke addr data 以一个字为单位修改内存中 addr 位置的数据为 data(addr 是 4 字节对齐,十六进制的形式,长度为 8位十六进制, data 也是十六进制的形式,长度为8位十六进制)<br>
+</li>
+</ul>
+</li>
+<li><p>程序执行结果:<br>
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146574351494.png" alt="4.1">
+从执行结果可以看出，开机时显示欢迎信息，输入命令<br>
+Peek 0x08000000，显示出了相应内存地址的内容<br>
+Peek 0x20000000，显示出了相应内存地址的内容<br>
+Poke 0x20000000 0x1111FFFF，首先显示了在没有修改之前的内容，之后显示出了写入之后的内存结果。  </p></li>
+<li>
+<p>代码分析：  </p>
 
-<p>从执行结果可以看出，开机时显示欢迎信息，输入命令
-Peek 0x08000000，显示出了相应内存地址的内容
-Peek 0x20000000，显示出了相应内存地址的内容
-Poke 0x20000000 0x1111FFFF，首先显示了在没有修改之前的内容，之后显示出了写入之后的内存结果。</p>
+<ul>
+<li>功能函数<br>
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146574351549.png" alt="4.2">
+sendData函数对DMA的串口发送功能进行了简单的包装。<br>
+receiveData函数对DMA串口的接收功能进行了简单的包装。<br>
+parseOrder进行命令的解析。<br>
+parseAddr进行十六进制字符串到数字的转换。<br>
+</li>
+<li>主函数<br>
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146574351598.png" alt="4.3">
+主函数中负责输出开始的欢迎信息，在主循环中进行命令的接收、解析以及执行，在传输中，使用了DMA进行信息的发送和接收。<br>
+</li>
+<li>DMA及串口的配置函数<br>
 
-<p>3.2代码分析：
-3.2.1 功能函数</p>
-
-<pre><code>sendData函数对DMA的串口发送功能进行了简单的包装。
-receiveData函数对DMA串口的接收功能进行了简单的包装。
-parseOrder进行命令的解析。
-parseAddr进行十六进制字符串到数字的转换。
-</code></pre>
-
-<p>3.2.2 主函数
-    主函数中负责输出开始的欢迎信息，在主循环中进行命令的接收、解析以及执行，在传输中，使用了DMA进行信息的发送和接收。</p>
-
-<pre><code>3.2.3 DMA及串口的配置函数
-    配置函数：
-
-    析构函数：
-</code></pre>
-
-<p>3.2.4 中断函数</p>
-
-<p>3.2.5 来自于官方文档的头文件</p>
-
-<p>3.3 下载配置
-    Bootloader需要配置相应的启动地址，以及可写的内存范围，从而之后装载程序并开始执行，配置如下：</p>
-
-<pre><code>可以看到，rom地址从0x08000000开始，长度为0x10000，ram地址从0x20000000开始，长度为0x5000。
-</code></pre>
+<ul>
+<li>配置函数：<br>
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146574351653.png" alt="4.4">
+</li>
+<li>析构函数：<br>
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146574351692.png" alt="4.5">
+</li>
+<li>中断函数<br>
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146574351725.png" alt="4.6">
+</li>
+</ul>
+</li>
+<li>来自于官方文档的头文件<br>
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146574351759.png" alt="4.7">
+</li>
+</ul>
+</li>
+<li><p>下载配置<br>
+Bootloader需要配置相应的启动地址，以及可写的内存范围，从而之后装载程序并开始执行，配置如下：<br>
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146574351801.png" alt="4.8">
+可以看到，rom地址从0x08000000开始，长度为0x10000，ram地址从0x20000000开始，长度为0x5000。  </p></li>
+</ul>
 
 <h2>
 <a id="嵌入式实验五" class="anchor" href="#%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AE%9E%E9%AA%8C%E4%BA%94" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>嵌入式实验五</h2>
@@ -673,73 +750,102 @@ parseAddr进行十六进制字符串到数字的转换。
 <h4>
 <a id="一-实验目的和要求-3" class="anchor" href="#%E4%B8%80-%E5%AE%9E%E9%AA%8C%E7%9B%AE%E7%9A%84%E5%92%8C%E8%A6%81%E6%B1%82-3" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>一 实验目的和要求</h4>
 
-<p>1.1 学习uC/OS II的应用程序编写；
-1.2 理解如何直接操纵GPIO，体会与Linux的不同；
-1.3 学习单总线设备的访问方式；
-1.4 学习7段数码管的时分复用驱动方式。</p>
+<ul>
+<li>学习uC/OS II的应用程序编写；<br>
+</li>
+<li>理解如何直接操纵GPIO，体会与Linux的不同；<br>
+</li>
+<li>学习单总线设备的访问方式；<br>
+</li>
+<li>学习7段数码管的时分复用驱动方式。<br>
+</li>
+</ul>
 
 <h4>
 <a id="二-实验器材-3" class="anchor" href="#%E4%BA%8C-%E5%AE%9E%E9%AA%8C%E5%99%A8%E6%9D%90-3" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>二 实验器材</h4>
 
-<p>STM32F103板一块；
-USB串口板一块；
-面包板一块；
-两位7段数码管（共阳）一颗；
-360Ω 1/8W电阻2颗；
-DHT-11 温湿度传感器1个；
-面包线若干。</p>
+<p>STM32F103板一块；<br>
+  USB串口板一块；<br>
+  面包板一块；<br>
+  两位7段数码管（共阳）一颗；<br>
+  360Ω 1/8W电阻2颗；<br>
+  DHT-11 温湿度传感器1个；<br>
+  面包线若干。  </p>
 
 <h4>
-<a id="三-实验过程和数据记录-3" class="anchor" href="#%E4%B8%89-%E5%AE%9E%E9%AA%8C%E8%BF%87%E7%A8%8B%E5%92%8C%E6%95%B0%E6%8D%AE%E8%AE%B0%E5%BD%95-3" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>三 实验过程和数据记录</h4>
+<a id="三-实验过程和数据记录-2" class="anchor" href="#%E4%B8%89-%E5%AE%9E%E9%AA%8C%E8%BF%87%E7%A8%8B%E5%92%8C%E6%95%B0%E6%8D%AE%E8%AE%B0%E5%BD%95-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>三 实验过程和数据记录</h4>
 
-<p>3.1 设计输出方案，画连线示意图；
-3.2 在面包板上连线，完成外部电路；
-3.3 编写C/C++程序，测试程序和电路；
- a. 测试、实现uC/OS II对GPIO的访问；
- b. 实现DHT-11数据的读；
- c. 实现以时分复用方式在四位7段数码管上依次显示0000-9999的数字；
- d. 用两个uc/OS II任务，一个定时读DHT-11数据，一个轮流驱动数码管，一秒一次显示当前温度和湿度。注意处理好 两个任务之间的数据共享。
-程序执行结果:</p>
+<ul>
+<li>设计输出方案，画连线示意图；<br>
+</li>
+<li>在面包板上连线，完成外部电路；<br>
+</li>
+<li>编写C/C++程序，测试程序和电路；<br>
 
-<p>从执行结果可以看出DHT11电源指示灯亮起，右侧的绿色led灯熄灭（熄灭表示数据校验通过），左侧的4位数码管前两位表示湿度，百分制，后两位表示温度。从之前读取到的数据来看，小数部分全部都是0，因此忽略。</p>
+<ul>
+<li>测试、实现uC/OS II对GPIO的访问；<br>
+</li>
+<li>实现DHT-11数据的读；<br>
+</li>
+<li>实现以时分复用方式在四位7段数码管上依次显示0000-9999的数字；<br>
+</li>
+<li>用两个uc/OS II任务，一个定时读DHT-11数据，一个轮流驱动数码管，一秒一次显示当前温度和湿度。注意处理好 两个任务之间的数据共享。<br>
+程序执行结果:<br>
+</li>
+</ul>
+</li>
+</ul>
 
-<p>3.4代码分析：
-a. uCOS移植
-os_cpu.h 注释掉uCOS自身关于时钟处理的函数，之后会在stm32的时钟中断中直接实现。</p>
+<p>从执行结果可以看出DHT11电源指示灯亮起，右侧的绿色led灯熄灭（熄灭表示数据校验通过），左侧的4位数码管前两位表示湿度，百分制，后两位表示温度。从之前读取到的数据来看，小数部分全部都是0，因此忽略。  </p>
 
-<p>os_cpu_a.asm 对底层汇编做一些修改，主要是由于汇编标准不同的缘故。</p>
+<ul>
+<li>代码分析：<br>
 
-<p>os_cpu_c.c 注释掉一些与之前注释的系统时钟相关的宏定义。</p>
+<ul>
+<li>uCOS移植<br>
+os_cpu.h 注释掉uCOS自身关于时钟处理的函数，之后会在stm32的时钟中断中直接实现。<br>
+</li>
+</ul>
+</li>
+</ul>
 
-<p>os_cfg.h 内核裁剪。</p>
+<p>os_cpu_a.asm 对底层汇编做一些修改，主要是由于汇编标准不同的缘故。  </p>
 
-<p>stm32f1xx_it.c 配置操作系统时钟中断。</p>
+<p>os_cpu_c.c 注释掉一些与之前注释的系统时钟相关的宏定义。  </p>
 
-<p>startup_stm32f103xb.s 把stm32的pendSV中断连接到操作系统上去。</p>
+<p>os_cfg.h 内核裁剪。  </p>
 
-<p>b) 用户代码
-includes.h 用户函数的头文件集合。</p>
+<p>stm32f1xx_it.c 配置操作系统时钟中断。  </p>
 
-<p>app_cfg.h 用户函数堆栈、优先级定义。</p>
+<p>startup_stm32f103xb.s 把stm32的pendSV中断连接到操作系统上去。  </p>
 
-<p>app.h 用户函数定义。</p>
+<pre><code>* 用户代码
+</code></pre>
 
-<p>app.c 用户函数。</p>
+<p>includes.h 用户函数的头文件集合。  </p>
 
-<p>由于在操作系统中，中断的响应会导致操作系统的中断嵌套，因此会产生中断的资源需要在操作系统启动之后、相关任务启动之前配置。Task_start是初始任务，DHT11_Display负责温湿度传感器数据在数码管上的显示。同时，DHT11的数据读取需要至少精确到20us左右的时间控制，如果使用操作系统自身的时钟或者是任务切换，都不能保证实时性，因此，我使用外部定时器中断来控制数据的读取。
-    main.c 操作系统启动，中断响应函数，资源配置函数。</p>
+<p>app_cfg.h 用户函数堆栈、优先级定义。  </p>
 
-<p>main函数负责做初始的资源配置，例如系统时钟等，然后初始化系统，创建第一个任务，启动操作系统。</p>
+<p>app.h 用户函数定义。  </p>
 
-<p>TIM_Init函数配置外置定时器，GPIO_Init函数配置两个GPIO口，由于不会产生中断，因此可以在操作系统启动前配置。</p>
+<p>app.c 用户函数。  </p>
 
-<p>Display_Init函数初始化数码管使用到的GPIO口，DHT11_output与DHT11_input控制DHT11数据口的属性，在数据读取中会使用到。</p>
+<p>由于在操作系统中，中断的响应会导致操作系统的中断嵌套，因此会产生中断的资源需要在操作系统启动之后、相关任务启动之前配置。Task_start是初始任务，DHT11_Display负责温湿度传感器数据在数码管上的显示。同时，DHT11的数据读取需要至少精确到20us左右的时间控制，如果使用操作系统自身的时钟或者是任务切换，都不能保证实时性，因此，我使用外部定时器中断来控制数据的读取。  </p>
 
-<p>定时器回调函数负责读取DHT11的数据。</p>
+<pre><code>* main.c 操作系统启动，中断响应函数，资源配置函数。  
+</code></pre>
 
-<p>stm32f1xx_it.c</p>
+<p>main函数负责做初始的资源配置，例如系统时钟等，然后初始化系统，创建第一个任务，启动操作系统。  </p>
 
-<p>配置外部定时器的中断处理函数，使其进入操作系统的中断嵌套。</p>
+<p>TIM_Init函数配置外置定时器，GPIO_Init函数配置两个GPIO口，由于不会产生中断，因此可以在操作系统启动前配置。  </p>
+
+<p>Display_Init函数初始化数码管使用到的GPIO口，DHT11_output与DHT11_input控制DHT11数据口的属性，在数据读取中会使用到。  </p>
+
+<p>定时器回调函数负责读取DHT11的数据。  </p>
+
+<p>stm32f1xx_it.c  </p>
+
+<p>配置外部定时器的中断处理函数，使其进入操作系统的中断嵌套。  </p>
 
 <h2>
 <a id="嵌入式实验六" class="anchor" href="#%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AE%9E%E9%AA%8C%E5%85%AD" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>嵌入式实验六</h2>
@@ -747,71 +853,84 @@ includes.h 用户函数的头文件集合。</p>
 <h4>
 <a id="一-实验目的和要求-4" class="anchor" href="#%E4%B8%80-%E5%AE%9E%E9%AA%8C%E7%9B%AE%E7%9A%84%E5%92%8C%E8%A6%81%E6%B1%82-4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>一 实验目的和要求</h4>
 
-<p>学习Linux内核的配置和编译；
-深入理解Linux系统调用；
-理解ARM和x86的CPU模式（系统模式、用户模式等）的不同。</p>
-
-<h4>
-<a id="二-实验器材-4" class="anchor" href="#%E4%BA%8C-%E5%AE%9E%E9%AA%8C%E5%99%A8%E6%9D%90-4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>二 实验器材</h4>
-
-<p>硬件
-pcDuino v2板一块；
-5V/1A电源一个；
-microUSB线一根；
-以下为自备（可选）器材：
-PC（Windows/Mac OS/Linux）一台；
-USB-TTL串口线一根（FT232RL芯片或PL2303芯片）；
-以太网线一根（可能还需要路由器等）。
-软件
-交叉编译软件。</p>
-
-<h4>
-<a id="三-实验过程和数据记录-4" class="anchor" href="#%E4%B8%89-%E5%AE%9E%E9%AA%8C%E8%BF%87%E7%A8%8B%E5%92%8C%E6%95%B0%E6%8D%AE%E8%AE%B0%E5%BD%95-4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>三 实验过程和数据记录</h4>
-
-<p>3.1实验步骤
-3.1.1使用交叉编译工具或本机编译工具，通过Linux内核源码进行实验:
-3.1.2 寻找、下载pcDuino的Linux内核源码；
-3.1.3在内核中加入新的系统调用，具体功能没有要求，能输出调试信息即可;
-3.1.4修改内核代码配置，编译内核；
-3.1.5将编译好的内核装载到pcDuino启动；
-3.1.6编写C代码，用两种方法做系统调用，测试：
-3.1.7嵌入汇编代码，用r0传参数；</p>
-
-<p>3.2实验过程记录</p>
+<ul>
+<li>学习Linux内核的配置和编译；<br>
+</li>
+<li>深入理解Linux系统调用；<br>
+</li>
+<li>理解ARM和x86的CPU模式（系统模式、用户模式等）的不同。<br>
+#### 二 实验器材<br>
+</li>
+<li>硬件<br>
+pcDuino v2板一块；<br>
+5V/1A电源一个；<br>
+microUSB线一根；<br>
+以下为自备（可选）器材：<br>
+PC（Windows/Mac OS/Linux）一台；<br>
+USB-TTL串口线一根（FT232RL芯片或PL2303芯片）；<br>
+以太网线一根（可能还需要路由器等）。<br>
+</li>
+<li>软件<br>
+交叉编译软件。<br>
+#### 三 实验过程和数据记录<br>
+</li>
+<li>
+<p>实验步骤  </p>
 
 <ul>
-<li><p>从git上下载树莓派相关的linux源代码与编译工具</p></li>
-<li><p>修改内核源代码，添加系统调用
-在/arch/arm/kernel/call.S中添加系统跳转位置</p></li>
+<li>使用交叉编译工具或本机编译工具，通过Linux内核源码进行实验:<br>
+</li>
+<li>寻找、下载pcDuino的Linux内核源码；<br>
+</li>
+<li>在内核中加入新的系统调用，具体功能没有要求，能输出调试信息即可;<br>
+</li>
+<li>修改内核代码配置，编译内核；<br>
+</li>
+<li>将编译好的内核装载到pcDuino启动；<br>
+</li>
+<li>编写C代码，用两种方法做系统调用，测试：<br>
+</li>
+<li>嵌入汇编代码，用r0传参数；<br>
+</li>
 </ul>
-
-<p>在这里，我们把新的系统调用添加到最后面，位于第403行。</p>
-
-<p>在/arch/arm/include/uapi/asm/unistd.h中设置新增系统调用的位置（即该系统调用在系统调用表中的位置）</p>
-
-<p>我们将新增的系统调用添加在第420行。</p>
-
-<p>在源代码中添加新的系统调用的实现函数：</p>
-
-<p>可以看到新增的系统调用仅仅是在系统日志中打印被调用的信息。</p>
-
-<p>最后，在/include/linux/syscall.h中添加新增的系统调用的声明。</p>
-
-<p>新增系统调用的定义被添加在892行。</p>
+</li>
+<li>
+<p>实验过程记录  </p>
 
 <ul>
-<li><p>编译系统并装入sd卡中</p></li>
-<li><p>验证新增的系统调用</p></li>
+<li><p>从git上下载树莓派相关的linux源代码与编译工具  </p></li>
+<li><p>修改内核源代码，添加系统调用<br>
+在/arch/arm/kernel/call.S中添加系统跳转位置  </p></li>
+</ul>
+</li>
 </ul>
 
-<p>编写以下用户程序，分别使用c语言syscall函数和汇编代码调用新增的系统调用。</p>
+<p>在这里，我们把新的系统调用添加到最后面，位于第403行。  </p>
 
-<p>使用syscall函数调用直接将调用号以及相关的参数作为syscall的参数即可。使用汇编调用则是将系统调用号放在r7寄存器上，将参数放在r0及之后的寄存器中。需要注意的是，对于较大的立即数，mov可能会无法通过汇编，使用ldr即可。
-编译运行之后，可以在系统日志中看到如下输出：</p>
+<p>在/arch/arm/include/uapi/asm/unistd.h中设置新增系统调用的位置（即该系统调用在系统调用表中的位置）  </p>
 
-<p>可见新增的系统调用已经被成功调用。</p>
+<p>我们将新增的系统调用添加在第420行。  </p>
 
-<p>与x86相比，添加系统调用的步骤都是相同的，不同之处在于具体文件的位置不同，以及设计到与汇编相关的系统调用表的修改，由于不同的平台汇编代码格式的不同，因此这部分的代码区别较大。</p>
+<p>在源代码中添加新的系统调用的实现函数：  </p>
+
+<p>可以看到新增的系统调用仅仅是在系统日志中打印被调用的信息。  </p>
+
+<p>最后，在/include/linux/syscall.h中添加新增的系统调用的声明。  </p>
+
+<p>新增系统调用的定义被添加在892行。  </p>
+
+<p>编译系统并装入sd卡中  </p>
+
+<p>验证新增的系统调用  </p>
+
+<p>编写以下用户程序，分别使用c语言syscall函数和汇编代码调用新增的系统调用。  </p>
+
+<p>使用syscall函数调用直接将调用号以及相关的参数作为syscall的参数即可。使用汇编调用则是将系统调用号放在r7寄存器上，将参数放在r0及之后的寄存器中。需要注意的是，对于较大的立即数，mov可能会无法通过汇编，使用ldr即可。<br>
+编译运行之后，可以在系统日志中看到如下输出：  </p>
+
+<p>可见新增的系统调用已经被成功调用。  </p>
+
+<p>与x86相比，添加系统调用的步骤都是相同的，不同之处在于具体文件的位置不同，以及设计到与汇编相关的系统调用表的修改，由于不同的平台汇编代码格式的不同，因此这部分的代码区别较大。  </p>
 
 <h2>
 <a id="嵌入式系统七" class="anchor" href="#%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E4%B8%83" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>嵌入式系统七</h2>
@@ -819,55 +938,57 @@ USB-TTL串口线一根（FT232RL芯片或PL2303芯片）；
 <h4>
 <a id="一-实验目的和要求-5" class="anchor" href="#%E4%B8%80-%E5%AE%9E%E9%AA%8C%E7%9B%AE%E7%9A%84%E5%92%8C%E8%A6%81%E6%B1%82-5" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>一 实验目的和要求</h4>
 
-<p>学习嵌入式Linux的GPIO的使用方式；
-学习嵌入式Linux的Arduino接口库；
-学习使用面包板搭简单的外部电路；
-学习Linux设备驱动程序的开发过程。
-学习在内核中访问外设寄存器，操纵外设的方法。</p>
-
-<h4>
-<a id="二-实验器材-5" class="anchor" href="#%E4%BA%8C-%E5%AE%9E%E9%AA%8C%E5%99%A8%E6%9D%90-5" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>二 实验器材</h4>
-
-<p>硬件
-Linux实验板卡一块；
-5V/1A电源一个；
-microUSB线一根；
-面包板一块；
-MAX7219驱动的8x8 LED矩阵一个；
-面包线若干。
-以下为自备（可选）器材：
-PC（Windows/Mac OS/Linux）一台；
-USB-TTL串口线一根（FT232RL芯片或PL2303芯片）；
-以太网线一根（可能还需要路由器等）。
-软件
+<ul>
+<li>学习嵌入式Linux的GPIO的使用方式；<br>
+</li>
+<li>学习嵌入式Linux的Arduino接口库；<br>
+</li>
+<li>学习使用面包板搭简单的外部电路；<br>
+</li>
+<li>学习Linux设备驱动程序的开发过程。<br>
+</li>
+<li>学习在内核中访问外设寄存器，操纵外设的方法。<br>
+####二 实验器材<br>
+</li>
+<li>硬件<br>
+Linux实验板卡一块；<br>
+5V/1A电源一个；<br>
+microUSB线一根；<br>
+面包板一块；<br>
+MAX7219驱动的8x8 LED矩阵一个；<br>
+面包线若干。<br>
+以下为自备（可选）器材：<br>
+PC（Windows/Mac OS/Linux）一台；<br>
+USB-TTL串口线一根（FT232RL芯片或PL2303芯片）；<br>
+以太网线一根（可能还需要路由器等）。</li>
+<li>软件
 编译软件；
-Fritzing。</p>
+Fritzing。
+####三 实验过程和数据记录<br>
+首先将led矩阵显示器与树莓派连接，使用5v供电，然后将data、cs、clk分别接到没有使用的gpio口上:<br>
+</li>
+</ul>
 
-<h4>
-<a id="三-实验过程和数据记录-5" class="anchor" href="#%E4%B8%89-%E5%AE%9E%E9%AA%8C%E8%BF%87%E7%A8%8B%E5%92%8C%E6%95%B0%E6%8D%AE%E8%AE%B0%E5%BD%95-5" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>三 实验过程和数据记录</h4>
+<p>编写设备驱动程序：<br>
+相关定义：  </p>
 
-<p>首先将led矩阵显示器与树莓派连接，使用5v供电，然后将data、cs、clk分别接到没有使用的gpio口上:</p>
+<p>Data_pin表示数据gpio的接口号<br>
+Clk_pin表示时钟gpio的接口号<br>
+Cs_pin表示片选gpio的接口号<br>
+DECODE_MOD、INTENSITY、SCAN_LIMIT、SHUTDOWN、DISPLAY_TEST分别是led显示矩阵的功能寄存器地址<br>
+BUFFERSIZE是字符设备缓冲区的大小<br>
+相关结构：  </p>
 
-<p>编写设备驱动程序：
-相关定义：</p>
+<p>驱动相关函数（更多部分请参看LEDdriver.c）  </p>
 
-<p>Data_pin表示数据gpio的接口号
-Clk_pin表示时钟gpio的接口号
-Cs_pin表示片选gpio的接口号
-DECODE_MOD、INTENSITY、SCAN_LIMIT、SHUTDOWN、DISPLAY_TEST分别是led显示矩阵的功能寄存器地址
-BUFFERSIZE是字符设备缓冲区的大小
-相关结构：</p>
+<p>编写makefile文件（交叉编译）：  </p>
 
-<p>驱动相关函数（更多部分请参看LEDdriver.c）</p>
+<p>编写驱动测试程序：  </p>
 
-<p>编写makefile文件（交叉编译）：</p>
-
-<p>编写驱动测试程序：</p>
-
-<p>可以看到，在打开文件的时候，使用的是非阻塞的方式，因此写入之后函数将会马上返回，而写入的字符将会在驱动程序的缓冲区中，每500ms显示一个字符。
-装载驱动，运行测试程序，运行过程请见视频:
-视频地址：<a href="http://v.youku.com/v_show/id_XMTU5MTAzOTY5Ng==.html">http://v.youku.com/v_show/id_XMTU5MTAzOTY5Ng==.html</a>
-密码：3134113</p>
+<p>可以看到，在打开文件的时候，使用的是非阻塞的方式，因此写入之后函数将会马上返回，而写入的字符将会在驱动程序的缓冲区中，每500ms显示一个字符。<br>
+装载驱动，运行测试程序，运行过程请见视频:<br>
+视频地址：<a href="http://v.youku.com/v_show/id_XMTU5MTAzOTY5Ng==.html">http://v.youku.com/v_show/id_XMTU5MTAzOTY5Ng==.html</a><br>
+密码：3134113  </p>
 
 <h2>
 <a id="嵌入式系统实验八" class="anchor" href="#%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E5%AE%9E%E9%AA%8C%E5%85%AB" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>嵌入式系统实验八</h2>
@@ -875,50 +996,52 @@ BUFFERSIZE是字符设备缓冲区的大小
 <h4>
 <a id="一-实验目的和要求-6" class="anchor" href="#%E4%B8%80-%E5%AE%9E%E9%AA%8C%E7%9B%AE%E7%9A%84%E5%92%8C%E8%A6%81%E6%B1%82-6" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>一 实验目的和要求</h4>
 
-<p>复习socket编程（网络原理课）；
-实现一个网络访问的LED矩阵显示器。</p>
+<ul>
+<li>复习socket编程（网络原理课）；<br>
+</li>
+<li>实现一个网络访问的LED矩阵显示器。<br>
+#### 二 实验器材<br>
+</li>
+<li>硬件<br>
+Linux实验板卡一块；<br>
+5V/1A电源一个；<br>
+microUSB线一根；<br>
+面包板一块；<br>
+8x8 LED矩阵一块；<br>
+74HC595两个；<br>
+360Ω 1/8W电阻8颗；<br>
+面包线若干。<br>
+以下为自备（可选）器材：<br>
+PC（Windows/Mac OS/Linux）一台；<br>
+USB-TTL串口线一根（FT232RL芯片或PL2303芯片）；<br>
+以太网线一根（可能还需要路由器等）。<br>
+</li>
+<li>软件<br>
+编译软件。<br>
+#### 三 实验过程<br>
+</li>
+<li>设计外部设备方案，画连线示意图；<br>
+</li>
+<li>在面包板上连线，完成外部电路；<br>
+</li>
+<li>编写Linux应用程序，能通过第七次实验的设备驱动程序控制LED矩阵显示字符串，每个字符停留500ms；<br>
+</li>
+<li>编写Linux应用程序，能通过TCP接受一个连接，将发来的文字在LED矩阵上流动显示出来；<br>
+</li>
+<li>用telnet连接Linux板卡，发送字符串来显示。<br>
+#### 四 代码分析<br>
+Telnetserver代码如下：<br>
+</li>
+</ul>
 
-<h4>
-<a id="二-实验器材-6" class="anchor" href="#%E4%BA%8C-%E5%AE%9E%E9%AA%8C%E5%99%A8%E6%9D%90-6" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>二 实验器材</h4>
-
-<p>硬件
-Linux实验板卡一块；
-5V/1A电源一个；
-microUSB线一根；
-面包板一块；
-8x8 LED矩阵一块；
-74HC595两个；
-360Ω 1/8W电阻8颗；
-面包线若干。
-以下为自备（可选）器材：
-PC（Windows/Mac OS/Linux）一台；
-USB-TTL串口线一根（FT232RL芯片或PL2303芯片）；
-以太网线一根（可能还需要路由器等）。
-软件
-编译软件。</p>
-
-<h4>
-<a id="三-实验过程" class="anchor" href="#%E4%B8%89-%E5%AE%9E%E9%AA%8C%E8%BF%87%E7%A8%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>三 实验过程</h4>
-
-<p>设计外部设备方案，画连线示意图；
-在面包板上连线，完成外部电路；
-编写Linux应用程序，能通过第七次实验的设备驱动程序控制LED矩阵显示字符串，每个字符停留500ms；
-编写Linux应用程序，能通过TCP接受一个连接，将发来的文字在LED矩阵上流动显示出来；
-用telnet连接Linux板卡，发送字符串来显示。</p>
-
-<h4>
-<a id="四-代码分析" class="anchor" href="#%E5%9B%9B-%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>四 代码分析</h4>
-
-<p>Telnetserver代码如下：</p>
-
-<p>代码中使用多线程来对矩阵显示器进行写入，主线程监听tcp连接，接收数据之后写入同步的queue中，同时子线程监听queue，当有数据到达时，就将其写入矩阵显示器中。退出命令为“ExIT”，当客户端输入ExIT时，子线程将会退出，主线程在收到子线程退出的信息之后也会退出。</p>
+<p>代码中使用多线程来对矩阵显示器进行写入，主线程监听tcp连接，接收数据之后写入同步的queue中，同时子线程监听queue，当有数据到达时，就将其写入矩阵显示器中。退出命令为“ExIT”，当客户端输入ExIT时，子线程将会退出，主线程在收到子线程退出的信息之后也会退出。  </p>
 
 <h4>
 <a id="五-实验结果" class="anchor" href="#%E4%BA%94-%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>五 实验结果</h4>
 
-<p>实验过程视频请见：
+<p>实验过程视频请见：<br>
 <a href="http://v.youku.com/v_show/id_XMTYwMDE3NTgxMg==.html">http://v.youku.com/v_show/id_XMTYwMDE3NTgxMg==.html</a>
-密码：
+密码：<br>
 3134113</p>
 
       <footer class="site-footer">
