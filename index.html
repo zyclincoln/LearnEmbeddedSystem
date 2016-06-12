@@ -19,10 +19,907 @@
     </section>
 
     <section class="main-content">
-      <h1>
-<a id="learnembeddedsystem" class="anchor" href="#learnembeddedsystem" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>LearnEmbeddedSystem</h1>
+      <h2>
+<a id="嵌入式实验一" class="anchor" href="#%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AE%9E%E9%AA%8C%E4%B8%80" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>嵌入式实验一</h2>
 
-<p>The code and words in the way of learning embedded system</p>
+<h4>
+<a id="一-实验目的和要求" class="anchor" href="#%E4%B8%80-%E5%AE%9E%E9%AA%8C%E7%9B%AE%E7%9A%84%E5%92%8C%E8%A6%81%E6%B1%82" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>一 实验目的和要求</h4>
+
+<ul>
+<li>1 了解嵌入式板卡一般情况；</li>
+<li>2 熟悉WRTNode的供电等接线方式；</li>
+<li>3 复习Linux启动过程（操作系统课）；</li>
+<li>4 复习通过Linux获得硬件数据（操作系统课）</li>
+<li>5 熟练掌握串口在PC上的使用；</li>
+<li>6 熟练掌握Linux的以太网和WiFi配置；</li>
+<li>7 熟练掌握Linux的SSH配置；</li>
+<li>8 熟练掌握PC上的SSH软件。</li>
+<li>9 掌握嵌入式板卡和PC建立文件共享的方式；</li>
+<li>10 寻找和安装交叉编译环境，理解交叉编译；</li>
+<li>11 熟悉嵌入式板卡的Linux下的编程环境；</li>
+<li>12 了解远程访问嵌入式板卡图形桌面的方式。</li>
+</ul>
+
+<h4>
+<a id="二-实验器材" class="anchor" href="#%E4%BA%8C-%E5%AE%9E%E9%AA%8C%E5%99%A8%E6%9D%90" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>二 实验器材</h4>
+
+<ul>
+<li>1 硬件
+实验主板一块；
+5V/1A电源一个；
+microUSB线一根；
+USB-TTL串口线一根（FT232RL芯片或PL2303芯片）。
+以下为自备（可选）器材：
+PC（Windows/Mac OS/Linux）一台；
+以太网线一根（可能还需要路由器等）；
+HDMI显示器；
+HDMI线；
+USB键盘/鼠标（无线）；
+USB Hub，推荐自带供电的类型。</li>
+<li>2 软件
+PC上的USB-TTL串口线配套的驱动程序；
+PC上的串口终端软件，如minicom、picocom、putty等；
+PC上的SSH软件，如putty等。
+交叉编译软件。</li>
+</ul>
+
+<h4>
+<a id="三-实验过程和数据记录" class="anchor" href="#%E4%B8%89-%E5%AE%9E%E9%AA%8C%E8%BF%87%E7%A8%8B%E5%92%8C%E6%95%B0%E6%8D%AE%E8%AE%B0%E5%BD%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>三 实验过程和数据记录</h4>
+
+<ul>
+<li>1 在PC上安装好USB串口驱动和串口终端软件；
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146573346178.png" alt="1.1">
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146573346217.png" alt="1.2">
+</li>
+<li>2 按照图纸要求，将USB串口线与WRTnode连接好，并连接好以太网（如果打算采用WiFi，可不连接以太网）。
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146573346259.png" alt="1.3">
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146573346328.png" alt="1.4">
+</li>
+<li>3 给WRTnode上电，记录启动过程的输出；
+启动过程输出：</li>
+</ul>
+
+<pre><code>U-Boot 1.1.3 - Modified by Manfeel (Jul  8 2014 - 18:53:13)
+
+Board: Ralink APSoC
+
+ __  __             ______        _
+|  \/  |           |  ____|      | |
+| \  / | __ _ _ __ | |__ ___  ___| |
+| |\/| |/ _` | '_ \|  __/ _ \/ _ \ |
+| |  | | (_| | | | | | |  __/  __/ |
+|_|  |_|\__,_|_| |_|_|  \___|\___|_|
+
+//硬件自检\
+//内存大小
+DRAM:  64 MB
+//代码定位
+relocate_code Pointer at: 83f64000
+enable ephy clock...done. rf reg 29 = 5
+SSC disabled.
+spi_wait_nsec: 28
+spi device id: ef 40 18 0 0 (40180000)
+//找到存储设备
+find flash: W25Q128FV
+raspi_read: from:30000 len:1000
+*** Warning - bad CRC, using default environment
+============================================
+
+//UBoot开始引导启动
+Ralink UBoot Version: 4.1.1.0
+--------------------------------------------
+//部分硬件基本信息
+ASIC 7620_MP (Port5&lt;-&gt;None)
+//内存基本信息
+DRAM component: 512 Mbits DDR, width 16
+DRAM bus: 16 bit
+Total memory: 64 MBytes
+Flash component: SPI Flash
+Date:Jul  8 2014  Time:18:53:13
+============================================
+//CPU基本信息
+//缓存信息
+icache: sets:512, ways:4, linesz:32 ,total:65536
+dcache: sets:256, ways:4, linesz:32 ,total:32768
+//频率信息
+ ##### The CPU freq = 600 MHZ ####
+ estimate memory size =64 Mbytes
+MT7620 gpio init : wps / reset pin
+WRTNode LED init.
+
+Please choose the operation:
+   1: Load system code to SDRAM via TFTP.
+   2: Load system code then write to Flash via TFTP.
+   3: Boot system code via Flash (default).
+   4: Entr boot command line interface.
+   7: Load Boot Loader code then write to Flash via Serial.
+   9: Load Boot Loader code then write to Flash via TFTP.
+
+or long press RESET/WPS button to enter web failsafe mode.
+before LEDON:
+data:3c7f86                                                                   0
+//通过Flash启动
+3: System Boot system code via Flash.
+(Re)start USB...
+USB:   usb_lowlevel_init
+Mediatek/Ralink USB EHCI host init hccr b01c0000 and hcor b01c0010 hc_length 16
+Register 1111 NbrPorts 1
+USB EHCI 1.00
+scanning bus for devices... 1 USB Device(s) found
+       scanning bus for storage devices... 0 Storage Device(s) found
+//载入linux启动镜像
+** Unable to use usb 0:1 for fatload **
+## Booting image at 80c00000 ...
+Bad Magic Number,3FABFA32
+## Booting image at bc050000 ...
+raspi_read: from:50000 len:40
+   Image Name:   MIPS OpenWrt Linux-3.10.44
+   Image Type:   MIPS Linux Kernel Image (lzma compressed)
+   Data Size:    1029095 Bytes = 1005 kB
+   Load Address: 80000000
+   Entry Point:  80000000
+raspi_read: from:50040 len:fb3e7
+   Verifying Checksum ... OK
+   Uncompressing Kernel Image ...
+hdr-&gt;ih_load = 0x00000080
+data pointer = 0x80c00000
+first 8 bytes data = 8000006D,2F609C00
+data length = 1029095
+OK
+No initrd
+## Transferring control to Linux (at address 80000000) ...
+//引导过程结束，Linux接管控制，开始启动Linux
+manfeel note, bootargs is : root=8:2 rootdelay=5 rootfstype=ext4 rw eth="00:11:22:33:44:55" console=ttyS0,115200
+## Giving linux memsize in MB, 64
+83f033b0:linux_argv[1] = root=8:2
+83f033b9:linux_argv[2] = rootdelay=5
+83f033c5:linux_argv[3] = rootfstype=ext4
+83f033d5:linux_argv[4] = rw
+83f033d8:linux_argv[5] = eth="00:11:22:33:44:55"
+83f033f0:linux_argv[6] = console=ttyS0,115200
+83f03810:linux_env[0] = memsize=64
+83f0381b:linux_env[1] = initrd_start=0x00000000
+83f03833:linux_env[2] = initrd_size=0x0
+83f03843:linux_env[3] = flash_start=0x00000000
+83f0385a:linux_env[4] = flash_size=0x1000000
+
+Starting kernel ...
+//kernel启动过程及日志
+[    0.000000] Linux version 3.10.44 (noel@na) (gcc version 4.8.3 (OpenWrt/Linaro GCC 4.8-2014.04 r41508) ) #20 Wed Aug 13 21:00:28 UTC 2014
+[    0.000000] Board has DDR2
+[    0.000000] Analog PMU set to hw control
+[    0.000000] Digital PMU set to hw control
+[    0.000000] SoC Type: Ralink MT7620N ver:2 eco:6
+[    0.000000] bootconsole [early0] enabled
+[    0.000000] CPU revision is: 00019650 (MIPS 24KEc)
+[    0.000000] MIPS: machine is WRTNODE
+[    0.000000] Determined physical RAM map:
+[    0.000000]  memory: 04000000 @ 00000000 (usable)
+[    0.000000] Initrd not found or empty - disabling initrd
+[    0.000000] Zone ranges:
+[    0.000000]   Normal   [mem 0x00000000-0x03ffffff]
+[    0.000000] Movable zone start for each node
+[    0.000000] Early memory node ranges
+[    0.000000]   node   0: [mem 0x00000000-0x03ffffff]
+[    0.000000] Primary instruction cache 64kB, VIPT, 4-way, linesize 32 bytes.
+[    0.000000] Primary data cache 32kB, 4-way, PIPT, no aliases, linesize 32 bytes
+[    0.000000] Built 1 zonelists in Zone order, mobility grouping on.  Total pages: 16256
+[    0.000000] Kernel command line: console=ttyS0,115200 rootfstype=squashfs,jffs2
+[    0.000000] PID hash table entries: 256 (order: -2, 1024 bytes)
+[    0.000000] Dentry cache hash table entries: 8192 (order: 3, 32768 bytes)
+[    0.000000] Inode-cache hash table entries: 4096 (order: 2, 16384 bytes)
+[    0.000000] Writing ErrCtl register=00003a2b
+[    0.000000] Readback ErrCtl register=00003a2b
+[    0.000000] Memory: 61652k/65536k available (2317k kernel code, 3884k reserved, 553k data, 200k init, 0k highmem)
+[    0.000000] SLUB: HWalign=32, Order=0-3, MinObjects=0, CPUs=1, Nodes=1
+[    0.000000] NR_IRQS:256
+[    0.000000] CPU Clock: 600MHz
+[    0.000000] Calibrating delay loop... 398.13 BogoMIPS (lpj=1990656)
+[    0.060000] pid_max: default: 32768 minimum: 301
+[    0.060000] Mount-cache hash table entries: 512
+[    0.070000] pinctrl core: initialized pinctrl subsystem
+[    0.070000] NET: Registered protocol family 16
+[    0.090000] bio: create slab &lt;bio-0&gt; at 0
+[    0.100000] rt2880_gpio 10000600.gpio: registering 24 gpios
+[    0.100000] rt2880_gpio 10000600.gpio: registering 24 irq handlers
+[    0.110000] rt2880_gpio 10000638.gpio: registering 16 gpios
+[    0.110000] rt2880_gpio 10000638.gpio: registering 16 irq handlers
+[    0.120000] rt2880_gpio 10000660.gpio: registering 32 gpios
+[    0.120000] rt2880_gpio 10000660.gpio: registering 32 irq handlers
+[    0.130000] rt2880_gpio 10000688.gpio: registering 1 gpios
+[    0.130000] rt2880_gpio 10000688.gpio: registering 1 irq handlers
+[    0.140000] Switching to clocksource MIPS
+[    0.140000] NET: Registered protocol family 2
+[    0.150000] TCP established hash table entries: 512 (order: 0, 4096 bytes)
+[    0.150000] TCP bind hash table entries: 512 (order: -1, 2048 bprocd: Console is alive
+procd: - watchdog -
+[    5.120000] usbcore: registered new interface driver usbfs
+[    5.120000] usbcore: registered new interface driver hub
+[    5.130000] usbcore: registered new device driver usb
+[    5.170000] SCSI subsystem initialized
+[    5.180000] ehci_hcd: USB 2.0 'Enhanced' Host Controller (EHCI) Driver
+[    5.190000] ehci-platform: EHCI generic platform driver
+[    5.390000] rt3xxx-usbphy ubsphy.3: remote usb device wakeup disabled
+[    5.400000] rt3xxx-usbphy ubsphy.3: UTMI 16bit 30MHz
+[    5.400000] ehci-platform 101c0000.ehci: EHCI Host Controller
+[    5.410000] ehci-platform 101c0000.ehci: new USB bus registered, assigned bus number 1
+[    5.420000] ehci-platform 101c0000.ehci: irq 26, io mem 0x101c0000
+[    5.440000] ehci-platform 101c0000.ehci: USB 2.0 started, EHCI 1.00
+[    5.440000] hub 1-0:1.0: USB hub found
+[    5.450000] hub 1-0:1.0: 1 port detected
+[    5.460000] usbcore: registered new interface driver usb-storage
+procd: - preinit -
+Press the [f] key and hit [enter] to enter failsafe mode
+Press the [1], [2], [3] or [4] key and hit [enter] to select the debug level
+kmod: ran 1 iterations
+[   10.310000] jffs2: notice: (296) jffs2_build_xattr_subsystem: complete building xattr subsystem, 1 of xdatum (1 unchecked, 0 orphan) and 12 of xref (0 dead, 0 orphan) found.
+block: extroot: no root or overlay mount defined
+jffs2 is ready
+jffs2 is ready
+[   10.500000] jffs2: notice: (293) jffs2_build_xattr_subsystem: complete building xattr subsystem, 1 of xdatum (1 unchecked, 0 orphan) and 12 of xref (0 dead, 0 orphan) found.
+switching to overlay
+procd: - early -
+procd: - watchdog -
+procd: - ubus -
+procd: - init -
+Failed to connect to ubus
+Please press Enter to activate this console.
+[   12.380000] NET: Registered protocol family 10
+[   12.400000] NTFS driver 2.1.30 [Flags: R/O MODULE].
+[   12.450000] nf_conntrack version 0.5.0 (966 buckets, 3864 max)
+[   12.480000] ip6_tables: (C) 2000-2006 Netfilter Core Team
+[   12.490000] Ralink/MTK WiFi EEPROM API Driver for OpenWrt Trunk. Copyright 2013 lintel&lt;lintel.huang@gmail.com&gt;
+[   12.500000] Ralink/MTK WiFi EEPROM API:Installed.
+[   12.500000] Ralink/MTK WiFi EEPROM API:SoC is MT7620.
+[   13.460000] rt2860v2_ap: module license 'Proprietary' taints kernel.
+[   13.470000] Disabling lock debugging due to kernel taint
+[   13.520000]
+[   13.520000]
+[   13.520000] === pAd = c0551000, size = 871592 ===
+[   13.520000]
+[   13.530000] &lt;-- RTMPAllocTxRxRingMemory, Status=0
+[   13.540000] &lt;-- RTMPAllocAdapterBlock, Status=0
+[   13.540000] AP Driver version-2.7.1.6
+[   13.570000] Linux video capture interface: v2.00
+[   13.610000] fuse init (API version 7.22)
+[   13.620000] usbcore: registered new interface driver cdc_acm
+[   13.630000] cdc_acm: USB Abstract Control Model driver for USB modems and ISDN adapters
+[   13.650000] ip_tables: (C) 2000-2006 Netfilter Core Team
+[   13.680000] usbcore: registered new interface driver usbserial
+[   13.690000] usbcore: registered new interface driver usbserial_generic
+[   13.690000] usbserial: USB Serial support registered for generic
+[   13.710000] usbcore: registered new interface driver uvcvideo
+[   13.710000] USB Video Class driver (1.1.1)
+[   13.740000] xt_time: kernel timezone is -0000
+[   13.740000] usbcore: registered new interface driver ftdi_sio
+[   13.750000] usbserial: USB Serial support registered for FTDI USB Serial Device
+[   13.770000] PPP generic driver version 2.4.2
+[   13.770000] NET: Registered protocol family 24
+[   13.790000] usbcore: registered new interface driver snd-usb-audio
+[   17.430000] RtmpOSNetDevDetach(): RtmpOSNetDeviceDetach(), dev-&gt;name=ra0!
+[   17.960000]
+[   17.960000]
+[   17.960000] === pAd = c09e3000, size = 871592 ===
+[   17.960000]
+[   17.970000] &lt;-- RTMPAllocTxRxRingMemory, Status=0
+[   17.980000] &lt;-- RTMPAllocAdapterBlock, Status=0
+[   17.980000] AP Driver version-2.7.1.6
+[   18.000000] RX DESC a2807000  size = 2048
+[   18.030000] RTMP_TimerListAdd: add timer obj c0a7aec8!
+[   18.030000] RTMP_TimerListAdd: add timer obj c0a44878!
+[   18.040000] RTMP_TimerListAdd: add timer obj c0a470c4!
+[   18.040000] RTMP_TimerListAdd: add timer obj c0a47184!
+[   18.050000] RTMP_TimerListAdd: add timer obj c0a47244!
+[   18.050000] RTMP_TimerListAdd: add timer obj c0a47304!
+[   18.060000] RTMP_TimerListAdd: add timer obj c0a473c4!
+[   18.060000] RTMP_TimerListAdd: add timer obj c0a47484!
+[   18.070000] RTMP_TimerListAdd: add timer obj c0a47544!
+[   18.070000] RTMP_TimerListAdd: add timer obj c0a47604!
+[   18.080000] RTMP_TimerListAdd: add timer obj c0a476c4!
+[   18.080000] RTMP_TimerListAdd: add timer obj c0a47784!
+[   18.090000] RTMP_TimerListAdd: add timer obj c0a47844!
+[   18.090000] RTMP_TimerListAdd: add timer obj c0a47904!
+[   18.100000] RTMP_TimerListAdd: add timer obj c0a479c4!
+[   18.100000] RTMP_TimerListAdd: add timer obj c0a47a84!
+[   18.110000] RTMP_TimerListAdd: add timer obj c0a47b44!
+[   18.120000] RTMP_TimerListAdd: add timer obj c0a47c04!
+[   18.120000] RTMP_TimerListAdd: add timer obj c0a4484c!
+[   18.130000] RTMP_TimerListAdd: add timer obj c0a47098!
+[   18.130000] RTMP_TimerListAdd: add timer obj c0a47158!
+[   18.140000] RTMP_TimerListAdd: add timer obj c0a47218!
+[   18.140000] RTMP_TimerListAdd: add timer obj c0a472d8!
+[   18.150000] RTMP_TimerListAdd: add timer obj c0a47398!
+[   18.150000] RTMP_TimerListAdd: add timer obj c0a47458!
+[   18.160000] RTMP_TimerListAdd: add timer obj c0a47518!
+[   18.160000] RTMP_TimerListAdd: add timer obj c0a475d8!
+[   18.170000] RTMP_TimerListAdd: add timer obj c0a47698!
+[   18.170000] RTMP_TimerListAdd: add timer obj c0a47758!
+[   18.180000] RTMP_TimerListAdd: add timer obj c0a47818!
+[   18.180000] RTMP_TimerListAdd: add timer obj c0a478d8!
+[   18.190000] RTMP_TimerListAdd: add timer obj c0a47998!
+[   18.190000] RTMP_TimerListAdd: add timer obj c0a47a58!
+[   18.200000] RTMP_TimerListAdd: add timer obj c0a47b18!
+[   18.200000] RTMP_TimerListAdd: add timer obj c0a47bd8!
+[   18.210000] RTMP_TimerListAdd: add timer obj c0a44820!
+[   18.210000] RTMP_TimerListAdd: add timer obj c0a470f0!
+[   18.220000] RTMP_TimerListAdd: add timer obj c0a471b0!
+[   18.230000] RTMP_TimerListAdd: add timer obj c0a47270!
+[   18.230000] RTMP_TimerListAdd: add timer obj c0a47330!
+[   18.240000] RTMP_TimerListAdd: add timer obj c0a473f0!
+[   18.240000] RTMP_TimerListAdd: add timer obj c0a474b0!
+[   18.250000] RTMP_TimerListAdd: add timer obj c0a47570!
+[   18.250000] RTMP_TimerListAdd: add timer obj c0a47630!
+[   18.260000] RTMP_TimerListAdd: add timer obj c0a476f0!
+[   18.260000] RTMP_TimerListAdd: add timer obj c0a477b0!
+[   18.270000] RTMP_TimerListAdd: add timer obj c0a47870!
+[   18.270000] RTMP_TimerListAdd: add timer obj c0a47930!
+[   18.280000] RTMP_TimerListAdd: add timer obj c0a479f0!
+[   18.280000] RTMP_TimerListAdd: add timer obj c0a47ab0!
+[   18.290000] RTMP_TimerListAdd: add timer obj c0a47b70!
+[   18.290000] RTMP_TimerListAdd: add timer obj c0a47c30!
+[   18.300000] RTMP_TimerListAdd: add timer obj c09eb1e8!
+[   18.300000] RTMP_TimerListAdd: add timer obj c09eaddc!
+[   18.310000] RTMP_TimerListAdd: add timer obj c09eb1b8!
+[   18.310000] RTMP_TimerListAdd: add timer obj c09eb560!
+[   18.320000] RTMP_TimerListAdd: add timer obj c09eb2b0!
+[   18.320000] RTMP_TimerListAdd: add timer obj c09eb2e0!
+[   18.330000] RTMP_TimerListAdd: add timer obj c09eb4a0!
+[   18.340000] RTMP_TimerListAdd: add timer obj c09eb4d0!
+[   18.340000] RTMP_TimerListAdd: add timer obj c09ee494!
+[   18.350000] RTMP_TimerListAdd: add timer obj c09ee088!
+[   18.350000] RTMP_TimerListAdd: add timer obj c09ee464!
+[   18.360000] RTMP_TimerListAdd: add timer obj c09ee80c!
+[   18.360000] RTMP_TimerListAdd: add timer obj c09ee55c!
+[   18.370000] RTMP_TimerListAdd: add timer obj c09ee58c!
+[   18.370000] RTMP_TimerListAdd: add timer obj c09ee74c!
+[   18.380000] RTMP_TimerListAdd: add timer obj c09ee77c!
+[   18.380000] RTMP_TimerListAdd: add timer obj c09f1740!
+[   18.390000] RTMP_TimerListAdd: add timer obj c09f1334!
+[   18.390000] RTMP_TimerListAdd: add timer obj c09f1710!
+[   18.400000] RTMP_TimerListAdd: add timer obj c09f1ab8!
+[   18.400000] RTMP_TimerListAdd: add timer obj c09f1808!
+[   18.410000] RTMP_TimerListAdd: add timer obj c09f1838!
+[   18.410000] RTMP_TimerListAdd: add timer obj c09f19f8!
+[   18.420000] RTMP_TimerListAdd: add timer obj c09f1a28!
+[   18.420000] RTMP_TimerListAdd: add timer obj c09f49ec!
+[   18.430000] RTMP_TimerListAdd: add timer obj c09f45e0!
+[   18.440000] RTMP_TimerListAdd: add timer obj c09f49bc!
+[   18.440000] RTMP_TimerListAdd: add timer obj c09f4d64!
+[   18.450000] RTMP_TimerListAdd: add timer obj c09f4ab4!
+[   18.450000] RTMP_TimerListAdd: add timer obj c09f4ae4!
+[   18.460000] RTMP_TimerListAdd: add timer obj c09f4ca4!
+[   18.460000] RTMP_TimerListAdd: add timer obj c09f4cd4!
+[   18.470000] RTMP_TimerListAdd: add timer obj c09f7c98!
+[   18.470000] RTMP_TimerListAdd: add timer obj c09f788c!
+[   18.480000] RTMP_TimerListAdd: add timer obj c09f7c68!
+[   18.480000] RTMP_TimerListAdd: add timer obj c09f8010!
+[   18.490000] RTMP_TimerListAdd: add timer obj c09f7d60!
+[   18.490000] RTMP_TimerListAdd: add timer obj c09f7d90!
+[   18.500000] RTMP_TimerListAdd: add timer obj c09f7f50!
+[   18.500000] RTMP_TimerListAdd: add timer obj c09f7f80!
+[   18.510000] RTMP_TimerListAdd: add timer obj c09faf44!
+[   18.510000] RTMP_TimerListAdd: add timer obj c09fab38!
+[   18.520000] RTMP_TimerListAdd: add timer obj c09faf14!
+[   18.520000] RTMP_TimerListAdd: add timer obj c09fb2bc!
+[   18.530000] RTMP_TimerListAdd: add timer obj c09fb00c!
+[   18.530000] RTMP_TimerListAdd: add timer obj c09fb03c!
+[   18.540000] RTMP_TimerListAdd: add timer obj c09fb1fc!
+[   18.550000] RTMP_TimerListAdd: add timer obj c09fb22c!
+[   18.550000] RTMP_TimerListAdd: add timer obj c09fe1f0!
+[   18.560000] RTMP_TimerListAdd: add timer obj c09fdde4!
+[   18.560000] RTMP_TimerListAdd: add timer obj c09fe1c0!
+[   18.570000] RTMP_TimerListAdd: add timer obj c09fe568!
+[   18.570000] RTMP_TimerListAdd: add timer obj c09fe2b8!
+[   18.580000] RTMP_TimerListAdd: add timer obj c09fe2e8!
+[   18.580000] RTMP_TimerListAdd: add timer obj c09fe4a8!
+[   18.590000] RTMP_TimerListAdd: add timer obj c09fe4d8!
+[   18.590000] RTMP_TimerListAdd: add timer obj c0a0149c!
+[   18.600000] RTMP_TimerListAdd: add timer obj c0a01090!
+[   18.600000] RTMP_TimerListAdd: add timer obj c0a0146c!
+[   18.610000] RTMP_TimerListAdd: add timer obj c0a01814!
+[   18.610000] RTMP_TimerListAdd: add timer obj c0a01564!
+[   18.620000] RTMP_TimerListAdd: add timer obj c0a01594!
+[   18.620000] RTMP_TimerListAdd: add timer obj c0a01754!
+[   18.630000] RTMP_TimerListAdd: add timer obj c0a01784!
+[   18.630000] RTMP_TimerListAdd: add timer obj c0a46c7c!
+[   18.640000] RTMP_TimerListAdd: add timer obj c0a46870!
+[   18.650000] RTMP_TimerListAdd: add timer obj c0a46c4c!
+[   18.650000] RTMP_TimerListAdd: add timer obj c0a46ff4!
+[   18.660000] RTMP_TimerListAdd: add timer obj c0a46d44!
+[   18.660000] RTMP_TimerListAdd: add timer obj c0a46d74!
+[   18.670000] RTMP_TimerListAdd: add timer obj c0a46cac!
+[   18.670000] RTMP_TimerListAdd: add timer obj c0a46cdc!
+[   18.680000] RTMP_TimerListAdd: add timer obj c0a46d0c!
+[   18.680000] RTMP_TimerListAdd: add timer obj c0a51834!
+[   18.690000] RTMP_TimerListAdd: add timer obj c0a51950!
+[   18.690000] RTMP_TimerListAdd: add timer obj c0a51860!
+[   18.700000] RTMP_TimerListAdd: add timer obj c0a48dac!
+[   18.700000] RTMP_TimerListAdd: add timer obj c09e8668!
+[   18.710000] RTMP_TimerListAdd: add timer obj c09eb914!
+[   18.720000] RTMP_TimerListAdd: add timer obj c09eebc0!
+[   18.720000] RTMP_TimerListAdd: add timer obj c09f1e6c!
+[   18.730000] RTMP_TimerListAdd: add timer obj c09f5118!
+[   18.730000] RTMP_TimerListAdd: add timer obj c09f83c4!
+[   18.740000] RTMP_TimerListAdd: add timer obj c09fb670!
+[   18.740000] RTMP_TimerListAdd: add timer obj c09fe91c!
+[   18.750000] RTMP_TimerListAdd: add timer obj c0a48ac0!
+[   18.750000] RTMP_TimerListAdd: add timer obj c0a48e14!
+[   18.890000] APSDCapable[0]=0
+[   18.900000] APSDCapable[1]=0
+[   18.900000] APSDCapable[2]=0
+[   18.900000] APSDCapable[3]=0
+[   18.900000] APSDCapable[4]=0
+[   18.910000] APSDCapable[5]=0
+[   18.910000] APSDCapable[6]=0
+[   18.910000] APSDCapable[7]=0
+[   18.920000] APSDCapable[8]=0
+[   18.920000] APSDCapable[9]=0
+[   18.920000] APSDCapable[10]=0
+[   18.930000] APSDCapable[11]=0
+[   18.930000] APSDCapable[12]=0
+[   18.930000] APSDCapable[13]=0
+[   18.930000] APSDCapable[14]=0
+[   18.940000] APSDCapable[15]=0
+[   18.940000] default ApCliAPSDCapable[0]=0
+[   19.140000] Key1Str is Invalid key length(0) or Type(0)
+[   19.150000] Key2Str is Invalid key length(0) or Type(0)
+[   19.160000] Key3Str is Invalid key length(0) or Type(0)
+[   19.160000] Key4Str is Invalid key length(0) or Type(0)
+[   19.370000] 7c:2f:8f:4a:a4:6f:7c:85:e0:29:d3:aa:5e:6c:cc:ed:
+[   19.380000] 59:62:18:ab:2c:82:d3:45:aa:43:0a:b1:6a:40:59:ca:
+[   19.380000]
+[   19.380000] I/F(apcli0) Key1Str is Invalid key length!
+[   19.420000] 1. Phy Mode = 9
+[   19.420000] 2. Phy Mode = 9
+[   19.430000] EEPROM:Read from [factory] offset 0x0,length 0x200.
+[   19.510000] E2PROM: D0 target power=0xff20
+[   19.510000] E2PROM: 40 MW Power Delta= 0
+[   19.520000] 3. Phy Mode = 9
+[   19.520000] RTMP_TimerListAdd: add timer obj c09e8260!
+[   19.530000] AntCfgInit: primary/secondary ant 0/1
+Initialize RF Central Registers for E2 !!!
+[   19.540000] Initialize RF Central Registers for E3 !!!
+[   19.540000] Initialize RF Channel Registers for E2 !!!
+[   19.550000] Initialize RF Channel Registers for E3 !!!
+[   19.550000] Initialize RF DCCal Registers for E2 !!!
+[   19.560000] Initialize RF DCCal Registers for E3 !!!
+[   19.560000] D1 = 0, D2 = 7, CalCode = 16 !!!
+[   19.570000] RT6352_Temperature_Init : BBPR49 = 0x0
+[   19.570000] RT6352_Temperature_Init : TemperatureRef25C = 0xfffffff6
+[   19.580000] Current Temperature from BBP_R49=0xfffffff8
+[   19.590000] RT6352_TssiTableAdjust: upper_bound = 0x7F decimal: 127
+[   19.590000] RT6352_TssiTableAdjust: lower_bound = 0xFFFFFF80 decimal: -128
+[   19.600000] *** RT6352_TssiTableAdjust: G Tssi[-7 .. +7] = -128 -1 -1 -1 -128 -1 -1
+[   19.600000]  - -1 - -1 -1 -1 -1 -1 -1 -1, offset=-10, tuning=0
+[   19.610000] RT6352_TssiTableAdjust: G Tssi[-7 .. +7] = -128 -11 -11 -11 -128 -11 -11 - -11 - -11 -11 -11 -11 -11 -11 -11, offset=-10, tuning=0
+[   19.630000] mp_temperature=0xffffffff, step = +7
+[   19.630000] E2PROM: G Tssi[-7 .. +7] = -128 -11 -11 -11 -128 -11 -11 - -11 - -11 -11 -11 -11 -11 -11 -11, offset=-10, tuning=0
+[   19.650000]  TX BW Filter Calibration !!!
+[   19.770000]  RX BW Filter Calibration !!!
+[   20.010000] LOFT Calibration Done!
+[   20.010000] IQCalibration Start!
+[   20.030000] IQCalibration Done! CH = 0, (gain= 0, phase= 1)
+[   20.030000] IQCalibration Start!
+[   20.050000] IQCalibration Done! CH = 1, (gain= 0, phase= 2)
+[   20.050000] TX IQ Calibration Done!
+[   20.090000] internal ALC is not enabled in NVM !
+[   20.100000] bAutoTxAgcG = 0
+[   20.100000] MCS Set = ff ff 00 00 01
+[   20.170000] Main bssid = 64:51:7e:80:17:ce
+[   20.180000] &lt;==== rt28xx_init, Status=0
+[   20.350000] 0x1300 = 00064380
+[   20.930000] device eth0.1 entered promiscuous mode
+[   20.940000] device eth0 entered promiscuous mode
+[   20.950000] br-lan: port 1(eth0.1) entered forwarding state
+[   20.950000] br-lan: port 1(eth0.1) entered forwarding state
+[   21.900000] device ra0 entered promiscuous mode
+[   21.910000] br-lan: port 2(ra0) entered forwarding state
+[   21.910000] br-lan: port 2(ra0) entered forwarding state
+[   22.950000] br-lan: port 1(eth0.1) entered forwarding state
+[   23.910000] br-lan: port 2(ra0) entered forwarding state
+procd: - init complete -
+</code></pre>
+
+<p>4 从终端登陆WRTnode的Linux，配置网络和/或WiFi，从WRTnode和PC两端证明网络已连接；
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146573346368.png" alt="1.5">
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146573346417.png" alt="1.6">
+5 配置WRTnode的SSH，可尝试采用各种不同的认证方式；
+WRTnode的SSH在初始化的时候已经自动配置。
+6 从PC通过SSH登陆WRTnode；
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146573346481.png" alt="1.7">
+7 看到多个不同端口的登陆（本机键盘/屏幕、串口和SSH），并运用Linux的write来互相通信。
+WRTnode上的linux属于精简版linux，没有找到查看当前在线用户的相关命令。如果安装nmap套件，剩余空间不足。
+8 配置嵌入式板卡上的SAMBA客户端，使它能访问PC上共享的目录；
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146573346535.png" alt="1.8">
+9 尝试各种与嵌入式板卡传递文件的方式并做比较：
+Sftp传输测试：
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146573346597.png" alt="1.9">
+在传输大文件时，有时会卡住无法继续传输，传输速度尚可。
+SSH传输测试：
+传输较稳定，速度平均为128KB/s。
+10 选择和安装PC上的交叉编译环境；
+在linux下，下载WRTnode帮助页面中提供的SDK，配置$PATH与$STAGING_DIR:</p>
+
+<pre><code>export PATH="/home/lincoln/WRTnode_sdk/toolchain/bin:$PATH"
+export STAGING_DIR="/home/lincoln/WRTnode_sdk/toolchain/bin:$STAGING_DIR"
+</code></pre>
+
+<p><img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146573346656.png" alt="1.10">
+11 交叉编译C语言的浮点运算程序到WRTnode上去运行，证明所编译的程序是MIPS的；
+程序运行结果：
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146573346695.png" alt="1.11">
+程序源代码：
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/14657334675.png" alt="1.12">
+十六进制查看：
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146573346803.png" alt="1.13">
+从000012b0位置可以看到，链接的库是mips的，因此此段程序应当是mips程序。同时，在WRTnode上能够运行，因此应当是mips程序。
+12尝试嵌入式板卡上的三个语言的开发环境：C/C++、Python和Java；
+WRTnode板卡上没有找到上述语言的开发环境，只能通过交叉编译运行。
+13尝试一种从PC远程访问嵌入式板卡图形桌面的方式：x-window（通过SSH）、RDP或VNC。
+WRTnode暂无支持的图形桌面。</p>
+
+<h4>
+<a id="四-讨论与心得" class="anchor" href="#%E5%9B%9B-%E8%AE%A8%E8%AE%BA%E4%B8%8E%E5%BF%83%E5%BE%97" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>四 讨论与心得</h4>
+
+<p>通过这次的实验，我对于嵌入式开发有了一个从无到有的认识，虽然目前还只是初步的学习，不过已经了解了开发板与开发机之间的通信、文件传输、交叉编译等知识。不过由于我分配到的是WRTnode，这块板子以轻量化著称，因此也牺牲了许多其他的功能，比如说各种各样的编译器。同时，由于WRTnode上的存储空间较小（64Mb），除去操作系统等必要组件之后，剩余的空间已经很小了，因此也不太可能把安装各种各样的开发环境。这样也会导致基于WRTnode开发程序相对困难一些。</p>
+
+<h2>
+<a id="嵌入式实验三" class="anchor" href="#%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AE%9E%E9%AA%8C%E4%B8%89" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>嵌入式实验三</h2>
+
+<h4>
+<a id="一-实验目的和要求-1" class="anchor" href="#%E4%B8%80-%E5%AE%9E%E9%AA%8C%E7%9B%AE%E7%9A%84%E5%92%8C%E8%A6%81%E6%B1%82-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>一 实验目的和要求</h4>
+
+<p>1.1理解MCU上电启动过程；
+1.2掌握使用Cube库来编写STM32裸机程序的方法；
+1.3掌握使用Cube库来编写GPIO和UART程序的方法；
+1.4掌握使用Cube库来编写中断响应程序的方法；
+1.5理解前后台程序模式；
+1.6掌握在STM32F103上编写裸机程序并下载运行的方法。</p>
+
+<h4>
+<a id="二-实验器材-1" class="anchor" href="#%E4%BA%8C-%E5%AE%9E%E9%AA%8C%E5%99%A8%E6%9D%90-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>二 实验器材</h4>
+
+<p>2.1 硬件
+STM32F103核心板板一块；
+microUSB线一根（供电）；
+STLink板或USB串口板一块。
+2.2 软件
+交叉编译软件。</p>
+
+<h4>
+<a id="三-实验过程和数据记录-1" class="anchor" href="#%E4%B8%89-%E5%AE%9E%E9%AA%8C%E8%BF%87%E7%A8%8B%E5%92%8C%E6%95%B0%E6%8D%AE%E8%AE%B0%E5%BD%95-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>三 实验过程和数据记录</h4>
+
+<p>3.1编写Cube程序，配置UART1为9600,8n1，上电后向串口输出“Hello”，在PC上通过串口软件观察结果.
+3.2通过面包板在PA11和PA12各连接一个按钮开关到地；
+3.3编写Cube程序，配置PA11和PA12为内部上拉到输入模式，在main()函数循环检测PA11按钮按下，并在按钮按下时 在串口输出“Pressed”
+3.4编写Cube程序，配置PA12下降沿触发中断，程序中设置两个全局变量，一个为计数器，一个为标识。当中断触发 时，计数器加1，并设置标识。在主循环中判断标识，如果标识置位则清除标识并通过串口输出计数值；
+3.5编写Cube程序，开启定时器为200ms中断一次，中断触发时设置标识，主循环根据这个标识来做串口输出（取消4 的串口输出）；
+3.6编写完整的码表程序，PA12的按钮表示车轮转了一圈，通过计数器可以得到里程，通过定时器中断得到的时间可以计算出速度；PA11的按钮切换模式，模式一在串口输出里程，模式二在串口输出速度。
+拓展内容:
+1 PA11的按钮也采用中断方式检测，主程序只检测标识做串口发送；
+2 在主循环中加入休眠，由定时器中断退出休眠；
+3 串口发送采用中断模式，由定时器中断程序启动串口发送，发送遇到字符串结尾停止；主程序在配置完成后始终休眠。
+3.7代码分析：
+Main函数部分:
+    主要完成UART、GPIO、TIMER的初始化、输出欢迎信息，以及主循环。
+    时钟与GPIO中断处理函数：
+    时钟与GPIO中断回调函数：
+    辅助函数：
+    Num2str函数负责将数字转化为字符串，printResult负责根据目前状态输出结果</p>
+
+<h2>
+<a id="嵌入式实验四" class="anchor" href="#%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AE%9E%E9%AA%8C%E5%9B%9B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>嵌入式实验四</h2>
+
+<h4>
+<a id="一-实验目的和要求-2" class="anchor" href="#%E4%B8%80-%E5%AE%9E%E9%AA%8C%E7%9B%AE%E7%9A%84%E5%92%8C%E8%A6%81%E6%B1%82-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>一 实验目的和要求</h4>
+
+<p>1.1 理解uboot等bootloader的一般功能和基本工作原理；
+1.2掌握在STM32F103上编写裸机程序并下载运行的方法。</p>
+
+<h4>
+<a id="二-实验器材-2" class="anchor" href="#%E4%BA%8C-%E5%AE%9E%E9%AA%8C%E5%99%A8%E6%9D%90-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>二 实验器材</h4>
+
+<p>2.1 硬件
+STM32F103核心板板一块；
+microUSB线一根（供电）；
+STLink板或USB串口板一块。
+2.2 软件
+交叉编译软件。</p>
+
+<h4>
+<a id="三-实验过程和数据记录-2" class="anchor" href="#%E4%B8%89-%E5%AE%9E%E9%AA%8C%E8%BF%87%E7%A8%8B%E5%92%8C%E6%95%B0%E6%8D%AE%E8%AE%B0%E5%BD%95-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>三 实验过程和数据记录</h4>
+
+<p>3.1 写一个自己的简易bootloader，能通过串口执行两条最简单的指令：
+3.1.1 peek addr 以一个字为单位读取内存中 addr 位置的数据(addr是4字节对齐,十六进制的 形式,长度为8位十六进制,例如 0x00008000),并以十六进制的形式输出
+3.1.2poke addr data 以一个字为单位修改内存中 addr 位置的数据为 data(addr 是 4 字节对齐,十六进制的形式,长度为 8位十六进制, data 也是十六进制的形式,长度为8位十六进制)
+程序执行结果:</p>
+
+<p>从执行结果可以看出，开机时显示欢迎信息，输入命令
+Peek 0x08000000，显示出了相应内存地址的内容
+Peek 0x20000000，显示出了相应内存地址的内容
+Poke 0x20000000 0x1111FFFF，首先显示了在没有修改之前的内容，之后显示出了写入之后的内存结果。</p>
+
+<p>3.2代码分析：
+3.2.1 功能函数</p>
+
+<pre><code>sendData函数对DMA的串口发送功能进行了简单的包装。
+receiveData函数对DMA串口的接收功能进行了简单的包装。
+parseOrder进行命令的解析。
+parseAddr进行十六进制字符串到数字的转换。
+</code></pre>
+
+<p>3.2.2 主函数
+    主函数中负责输出开始的欢迎信息，在主循环中进行命令的接收、解析以及执行，在传输中，使用了DMA进行信息的发送和接收。</p>
+
+<pre><code>3.2.3 DMA及串口的配置函数
+    配置函数：
+
+    析构函数：
+</code></pre>
+
+<p>3.2.4 中断函数</p>
+
+<p>3.2.5 来自于官方文档的头文件</p>
+
+<p>3.3 下载配置
+    Bootloader需要配置相应的启动地址，以及可写的内存范围，从而之后装载程序并开始执行，配置如下：</p>
+
+<pre><code>可以看到，rom地址从0x08000000开始，长度为0x10000，ram地址从0x20000000开始，长度为0x5000。
+</code></pre>
+
+<h2>
+<a id="嵌入式实验五" class="anchor" href="#%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AE%9E%E9%AA%8C%E4%BA%94" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>嵌入式实验五</h2>
+
+<h4>
+<a id="一-实验目的和要求-3" class="anchor" href="#%E4%B8%80-%E5%AE%9E%E9%AA%8C%E7%9B%AE%E7%9A%84%E5%92%8C%E8%A6%81%E6%B1%82-3" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>一 实验目的和要求</h4>
+
+<p>1.1 学习uC/OS II的应用程序编写；
+1.2 理解如何直接操纵GPIO，体会与Linux的不同；
+1.3 学习单总线设备的访问方式；
+1.4 学习7段数码管的时分复用驱动方式。</p>
+
+<h4>
+<a id="二-实验器材-3" class="anchor" href="#%E4%BA%8C-%E5%AE%9E%E9%AA%8C%E5%99%A8%E6%9D%90-3" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>二 实验器材</h4>
+
+<p>STM32F103板一块；
+USB串口板一块；
+面包板一块；
+两位7段数码管（共阳）一颗；
+360Ω 1/8W电阻2颗；
+DHT-11 温湿度传感器1个；
+面包线若干。</p>
+
+<h4>
+<a id="三-实验过程和数据记录-3" class="anchor" href="#%E4%B8%89-%E5%AE%9E%E9%AA%8C%E8%BF%87%E7%A8%8B%E5%92%8C%E6%95%B0%E6%8D%AE%E8%AE%B0%E5%BD%95-3" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>三 实验过程和数据记录</h4>
+
+<p>3.1 设计输出方案，画连线示意图；
+3.2 在面包板上连线，完成外部电路；
+3.3 编写C/C++程序，测试程序和电路；
+ a. 测试、实现uC/OS II对GPIO的访问；
+ b. 实现DHT-11数据的读；
+ c. 实现以时分复用方式在四位7段数码管上依次显示0000-9999的数字；
+ d. 用两个uc/OS II任务，一个定时读DHT-11数据，一个轮流驱动数码管，一秒一次显示当前温度和湿度。注意处理好 两个任务之间的数据共享。
+程序执行结果:</p>
+
+<p>从执行结果可以看出DHT11电源指示灯亮起，右侧的绿色led灯熄灭（熄灭表示数据校验通过），左侧的4位数码管前两位表示湿度，百分制，后两位表示温度。从之前读取到的数据来看，小数部分全部都是0，因此忽略。</p>
+
+<p>3.4代码分析：
+a. uCOS移植
+os_cpu.h 注释掉uCOS自身关于时钟处理的函数，之后会在stm32的时钟中断中直接实现。</p>
+
+<p>os_cpu_a.asm 对底层汇编做一些修改，主要是由于汇编标准不同的缘故。</p>
+
+<p>os_cpu_c.c 注释掉一些与之前注释的系统时钟相关的宏定义。</p>
+
+<p>os_cfg.h 内核裁剪。</p>
+
+<p>stm32f1xx_it.c 配置操作系统时钟中断。</p>
+
+<p>startup_stm32f103xb.s 把stm32的pendSV中断连接到操作系统上去。</p>
+
+<p>b) 用户代码
+includes.h 用户函数的头文件集合。</p>
+
+<p>app_cfg.h 用户函数堆栈、优先级定义。</p>
+
+<p>app.h 用户函数定义。</p>
+
+<p>app.c 用户函数。</p>
+
+<p>由于在操作系统中，中断的响应会导致操作系统的中断嵌套，因此会产生中断的资源需要在操作系统启动之后、相关任务启动之前配置。Task_start是初始任务，DHT11_Display负责温湿度传感器数据在数码管上的显示。同时，DHT11的数据读取需要至少精确到20us左右的时间控制，如果使用操作系统自身的时钟或者是任务切换，都不能保证实时性，因此，我使用外部定时器中断来控制数据的读取。
+    main.c 操作系统启动，中断响应函数，资源配置函数。</p>
+
+<p>main函数负责做初始的资源配置，例如系统时钟等，然后初始化系统，创建第一个任务，启动操作系统。</p>
+
+<p>TIM_Init函数配置外置定时器，GPIO_Init函数配置两个GPIO口，由于不会产生中断，因此可以在操作系统启动前配置。</p>
+
+<p>Display_Init函数初始化数码管使用到的GPIO口，DHT11_output与DHT11_input控制DHT11数据口的属性，在数据读取中会使用到。</p>
+
+<p>定时器回调函数负责读取DHT11的数据。</p>
+
+<p>stm32f1xx_it.c</p>
+
+<p>配置外部定时器的中断处理函数，使其进入操作系统的中断嵌套。</p>
+
+<h2>
+<a id="嵌入式实验六" class="anchor" href="#%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AE%9E%E9%AA%8C%E5%85%AD" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>嵌入式实验六</h2>
+
+<h4>
+<a id="一-实验目的和要求-4" class="anchor" href="#%E4%B8%80-%E5%AE%9E%E9%AA%8C%E7%9B%AE%E7%9A%84%E5%92%8C%E8%A6%81%E6%B1%82-4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>一 实验目的和要求</h4>
+
+<p>学习Linux内核的配置和编译；
+深入理解Linux系统调用；
+理解ARM和x86的CPU模式（系统模式、用户模式等）的不同。</p>
+
+<h4>
+<a id="二-实验器材-4" class="anchor" href="#%E4%BA%8C-%E5%AE%9E%E9%AA%8C%E5%99%A8%E6%9D%90-4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>二 实验器材</h4>
+
+<p>硬件
+pcDuino v2板一块；
+5V/1A电源一个；
+microUSB线一根；
+以下为自备（可选）器材：
+PC（Windows/Mac OS/Linux）一台；
+USB-TTL串口线一根（FT232RL芯片或PL2303芯片）；
+以太网线一根（可能还需要路由器等）。
+软件
+交叉编译软件。</p>
+
+<h4>
+<a id="三-实验过程和数据记录-4" class="anchor" href="#%E4%B8%89-%E5%AE%9E%E9%AA%8C%E8%BF%87%E7%A8%8B%E5%92%8C%E6%95%B0%E6%8D%AE%E8%AE%B0%E5%BD%95-4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>三 实验过程和数据记录</h4>
+
+<p>3.1实验步骤
+3.1.1使用交叉编译工具或本机编译工具，通过Linux内核源码进行实验:
+3.1.2 寻找、下载pcDuino的Linux内核源码；
+3.1.3在内核中加入新的系统调用，具体功能没有要求，能输出调试信息即可;
+3.1.4修改内核代码配置，编译内核；
+3.1.5将编译好的内核装载到pcDuino启动；
+3.1.6编写C代码，用两种方法做系统调用，测试：
+3.1.7嵌入汇编代码，用r0传参数；</p>
+
+<p>3.2实验过程记录</p>
+
+<ul>
+<li><p>从git上下载树莓派相关的linux源代码与编译工具</p></li>
+<li><p>修改内核源代码，添加系统调用
+在/arch/arm/kernel/call.S中添加系统跳转位置</p></li>
+</ul>
+
+<p>在这里，我们把新的系统调用添加到最后面，位于第403行。</p>
+
+<p>在/arch/arm/include/uapi/asm/unistd.h中设置新增系统调用的位置（即该系统调用在系统调用表中的位置）</p>
+
+<p>我们将新增的系统调用添加在第420行。</p>
+
+<p>在源代码中添加新的系统调用的实现函数：</p>
+
+<p>可以看到新增的系统调用仅仅是在系统日志中打印被调用的信息。</p>
+
+<p>最后，在/include/linux/syscall.h中添加新增的系统调用的声明。</p>
+
+<p>新增系统调用的定义被添加在892行。</p>
+
+<ul>
+<li><p>编译系统并装入sd卡中</p></li>
+<li><p>验证新增的系统调用</p></li>
+</ul>
+
+<p>编写以下用户程序，分别使用c语言syscall函数和汇编代码调用新增的系统调用。</p>
+
+<p>使用syscall函数调用直接将调用号以及相关的参数作为syscall的参数即可。使用汇编调用则是将系统调用号放在r7寄存器上，将参数放在r0及之后的寄存器中。需要注意的是，对于较大的立即数，mov可能会无法通过汇编，使用ldr即可。
+编译运行之后，可以在系统日志中看到如下输出：</p>
+
+<p>可见新增的系统调用已经被成功调用。</p>
+
+<p>与x86相比，添加系统调用的步骤都是相同的，不同之处在于具体文件的位置不同，以及设计到与汇编相关的系统调用表的修改，由于不同的平台汇编代码格式的不同，因此这部分的代码区别较大。</p>
+
+<h2>
+<a id="嵌入式系统七" class="anchor" href="#%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E4%B8%83" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>嵌入式系统七</h2>
+
+<h4>
+<a id="一-实验目的和要求-5" class="anchor" href="#%E4%B8%80-%E5%AE%9E%E9%AA%8C%E7%9B%AE%E7%9A%84%E5%92%8C%E8%A6%81%E6%B1%82-5" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>一 实验目的和要求</h4>
+
+<p>学习嵌入式Linux的GPIO的使用方式；
+学习嵌入式Linux的Arduino接口库；
+学习使用面包板搭简单的外部电路；
+学习Linux设备驱动程序的开发过程。
+学习在内核中访问外设寄存器，操纵外设的方法。</p>
+
+<h4>
+<a id="二-实验器材-5" class="anchor" href="#%E4%BA%8C-%E5%AE%9E%E9%AA%8C%E5%99%A8%E6%9D%90-5" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>二 实验器材</h4>
+
+<p>硬件
+Linux实验板卡一块；
+5V/1A电源一个；
+microUSB线一根；
+面包板一块；
+MAX7219驱动的8x8 LED矩阵一个；
+面包线若干。
+以下为自备（可选）器材：
+PC（Windows/Mac OS/Linux）一台；
+USB-TTL串口线一根（FT232RL芯片或PL2303芯片）；
+以太网线一根（可能还需要路由器等）。
+软件
+编译软件；
+Fritzing。</p>
+
+<h4>
+<a id="三-实验过程和数据记录-5" class="anchor" href="#%E4%B8%89-%E5%AE%9E%E9%AA%8C%E8%BF%87%E7%A8%8B%E5%92%8C%E6%95%B0%E6%8D%AE%E8%AE%B0%E5%BD%95-5" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>三 实验过程和数据记录</h4>
+
+<p>首先将led矩阵显示器与树莓派连接，使用5v供电，然后将data、cs、clk分别接到没有使用的gpio口上:</p>
+
+<p>编写设备驱动程序：
+相关定义：</p>
+
+<p>Data_pin表示数据gpio的接口号
+Clk_pin表示时钟gpio的接口号
+Cs_pin表示片选gpio的接口号
+DECODE_MOD、INTENSITY、SCAN_LIMIT、SHUTDOWN、DISPLAY_TEST分别是led显示矩阵的功能寄存器地址
+BUFFERSIZE是字符设备缓冲区的大小
+相关结构：</p>
+
+<p>驱动相关函数（更多部分请参看LEDdriver.c）</p>
+
+<p>编写makefile文件（交叉编译）：</p>
+
+<p>编写驱动测试程序：</p>
+
+<p>可以看到，在打开文件的时候，使用的是非阻塞的方式，因此写入之后函数将会马上返回，而写入的字符将会在驱动程序的缓冲区中，每500ms显示一个字符。
+装载驱动，运行测试程序，运行过程请见视频:
+视频地址：<a href="http://v.youku.com/v_show/id_XMTU5MTAzOTY5Ng==.html">http://v.youku.com/v_show/id_XMTU5MTAzOTY5Ng==.html</a>
+密码：3134113</p>
+
+<h2>
+<a id="嵌入式系统实验八" class="anchor" href="#%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E5%AE%9E%E9%AA%8C%E5%85%AB" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>嵌入式系统实验八</h2>
+
+<h4>
+<a id="一-实验目的和要求-6" class="anchor" href="#%E4%B8%80-%E5%AE%9E%E9%AA%8C%E7%9B%AE%E7%9A%84%E5%92%8C%E8%A6%81%E6%B1%82-6" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>一 实验目的和要求</h4>
+
+<p>复习socket编程（网络原理课）；
+实现一个网络访问的LED矩阵显示器。</p>
+
+<h4>
+<a id="二-实验器材-6" class="anchor" href="#%E4%BA%8C-%E5%AE%9E%E9%AA%8C%E5%99%A8%E6%9D%90-6" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>二 实验器材</h4>
+
+<p>硬件
+Linux实验板卡一块；
+5V/1A电源一个；
+microUSB线一根；
+面包板一块；
+8x8 LED矩阵一块；
+74HC595两个；
+360Ω 1/8W电阻8颗；
+面包线若干。
+以下为自备（可选）器材：
+PC（Windows/Mac OS/Linux）一台；
+USB-TTL串口线一根（FT232RL芯片或PL2303芯片）；
+以太网线一根（可能还需要路由器等）。
+软件
+编译软件。</p>
+
+<h4>
+<a id="三-实验过程" class="anchor" href="#%E4%B8%89-%E5%AE%9E%E9%AA%8C%E8%BF%87%E7%A8%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>三 实验过程</h4>
+
+<p>设计外部设备方案，画连线示意图；
+在面包板上连线，完成外部电路；
+编写Linux应用程序，能通过第七次实验的设备驱动程序控制LED矩阵显示字符串，每个字符停留500ms；
+编写Linux应用程序，能通过TCP接受一个连接，将发来的文字在LED矩阵上流动显示出来；
+用telnet连接Linux板卡，发送字符串来显示。</p>
+
+<h4>
+<a id="四-代码分析" class="anchor" href="#%E5%9B%9B-%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>四 代码分析</h4>
+
+<p>Telnetserver代码如下：</p>
+
+<p>代码中使用多线程来对矩阵显示器进行写入，主线程监听tcp连接，接收数据之后写入同步的queue中，同时子线程监听queue，当有数据到达时，就将其写入矩阵显示器中。退出命令为“ExIT”，当客户端输入ExIT时，子线程将会退出，主线程在收到子线程退出的信息之后也会退出。</p>
+
+<h4>
+<a id="五-实验结果" class="anchor" href="#%E4%BA%94-%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>五 实验结果</h4>
+
+<p>实验过程视频请见：
+<a href="http://v.youku.com/v_show/id_XMTYwMDE3NTgxMg==.html">http://v.youku.com/v_show/id_XMTYwMDE3NTgxMg==.html</a>
+密码：
+3134113</p>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/zyclincoln/LearnEmbeddedSystem">Learnembeddedsystem</a> is maintained by <a href="https://github.com/zyclincoln">zyclincoln</a>.</span>
