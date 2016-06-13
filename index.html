@@ -922,14 +922,11 @@ USB-TTL串口线一根（FT232RL芯片或PL2303芯片）；<br>
 <li>从git上下载树莓派相关的linux源代码与编译工具<br>
 <img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146580654325.png" alt="6.1">
 </li>
-<li>修改内核源代码，添加系统调用<br>
+<li>
+<p>修改内核源代码，添加系统调用<br>
 在/arch/arm/kernel/call.S中添加系统跳转位置
 <img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146580654371.png" alt="6.2">
-在这里，我们把新的系统调用添加到最后面，位于第403行。<br>
-</li>
-</ul>
-</li>
-</ul>
+在这里，我们把新的系统调用添加到最后面，位于第403行。  </p>
 
 <p>在/arch/arm/include/uapi/asm/unistd.h中设置新增系统调用的位置（即该系统调用在系统调用表中的位置）<br>
 <img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146580654414.png" alt="6.3">
@@ -957,6 +954,10 @@ USB-TTL串口线一根（FT232RL芯片或PL2303芯片）；<br>
 可见新增的系统调用已经被成功调用。  </p>
 
 <p>与x86相比，添加系统调用的步骤都是相同的，不同之处在于具体文件的位置不同，以及设计到与汇编相关的系统调用表的修改，由于不同的平台汇编代码格式的不同，因此这部分的代码区别较大。  </p>
+</li>
+</ul>
+</li>
+</ul>
 
 <h2>
 <a id="嵌入式系统七" class="anchor" href="#%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E4%B8%83" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>嵌入式系统七</h2>
