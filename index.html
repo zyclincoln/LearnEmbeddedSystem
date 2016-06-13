@@ -1,25 +1,44 @@
-<!DOCTYPE html>
-<html lang="en-us">
+<!doctype html>
+<html>
   <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>Learnembeddedsystem by zyclincoln</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-dark.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
   </head>
   <body>
-    <section class="page-header">
-      <h1 class="project-name">Learnembeddedsystem</h1>
-      <h2 class="project-tagline">The code and words in the way of learning embedded system</h2>
-      <a href="https://github.com/zyclincoln/LearnEmbeddedSystem" class="btn">View on GitHub</a>
-      <a href="https://github.com/zyclincoln/LearnEmbeddedSystem/zipball/master" class="btn">Download .zip</a>
-      <a href="https://github.com/zyclincoln/LearnEmbeddedSystem/tarball/master" class="btn">Download .tar.gz</a>
-    </section>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/zyclincoln/LearnEmbeddedSystem">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/zyclincoln/LearnEmbeddedSystem/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/zyclincoln/LearnEmbeddedSystem/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
 
-    <section class="main-content">
-      <h2>
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
+          <h1>Learnembeddedsystem</h1>
+          <p>The code and words in the way of learning embedded system</p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/zyclincoln">zyclincoln</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+        </div>
+
+        <h2>
 <a id="嵌入式实验一" class="anchor" href="#%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AE%9E%E9%AA%8C%E4%B8%80" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>嵌入式实验一</h2>
 
 <h4>
@@ -780,7 +799,8 @@ Bootloader需要配置相应的启动地址，以及可写的内存范围，从�
 </li>
 <li>在面包板上连线，完成外部电路；<br>
 </li>
-<li>编写C/C++程序，测试程序和电路；<br>
+<li>
+<p>编写C/C++程序，测试程序和电路；  </p>
 
 <ul>
 <li>测试、实现uC/OS II对GPIO的访问；<br>
@@ -791,61 +811,62 @@ Bootloader需要配置相应的启动地址，以及可写的内存范围，从�
 </li>
 <li>用两个uc/OS II任务，一个定时读DHT-11数据，一个轮流驱动数码管，一秒一次显示当前温度和湿度。注意处理好 两个任务之间的数据共享。<br>
 程序执行结果:<br>
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/14657442674.jpg" alt="5.1">
+从执行结果可以看出DHT11电源指示灯亮起，右侧的绿色led灯熄灭（熄灭表示数据校验通过），左侧的4位数码管前两位表示湿度，百分制，后两位表示温度。从之前读取到的数据来看，小数部分全部都是0，因此忽略。<br>
 </li>
 </ul>
 </li>
-</ul>
-
-<p>从执行结果可以看出DHT11电源指示灯亮起，右侧的绿色led灯熄灭（熄灭表示数据校验通过），左侧的4位数码管前两位表示湿度，百分制，后两位表示温度。从之前读取到的数据来看，小数部分全部都是0，因此忽略。  </p>
-
-<ul>
-<li>代码分析：<br>
+<li>
+<p>代码分析：  </p>
 
 <ul>
 <li>uCOS移植<br>
 os_cpu.h 注释掉uCOS自身关于时钟处理的函数，之后会在stm32的时钟中断中直接实现。<br>
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146574427138.png" alt="5.2">
+os_cpu_a.asm 对底层汇编做一些修改，主要是由于汇编标准不同的缘故。<br>
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146574427336.png" alt="5.3"><br>
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146574427537.png" alt="5.4">
+os_cpu_c.c 注释掉一些与之前注释的系统时钟相关的宏定义。<br>
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146574427738.png" alt="5.5">
+os_cfg.h 内核裁剪。<br>
+stm32f1xx_it.c 配置操作系统时钟中断。<br>
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146574427936.png" alt="5.6"> 
+startup_stm32f103xb.s 把stm32的pendSV中断连接到操作系统上去。
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146574428136.png" alt="5.7"><br>
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146574428337.png" alt="5.8">
+</li>
+<li>用户代码
+includes.h 用户函数的头文件集合。<br>
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146574428535.png" alt="5.9">
+app_cfg.h 用户函数堆栈、优先级定义。<br>
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146574428736.png" alt="5.10">
+app.h 用户函数定义。<br>
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146574428936.png" alt="5.11">
+app.c 用户函数。<br>
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146574429139.png" alt="5.12">
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/14657442934.png" alt="5.13">
+由于在操作系统中，中断的响应会导致操作系统的中断嵌套，因此会产生中断的资源需要在操作系统启动之后、相关任务启动之前配置。Task_start是初始任务，DHT11_Display负责温湿度传感器数据在数码管上的显示。同时，DHT11的数据读取需要至少精确到20us左右的时间控制，如果使用操作系统自身的时钟或者是任务切换，都不能保证实时性，因此，我使用外部定时器中断来控制数据的读取。<br>
 </li>
 </ul>
+
+<p>main.c 操作系统启动，中断响应函数，资源配置函数。<br>
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146574429637.png" alt="5.14">
+main函数负责做初始的资源配置，例如系统时钟等，然后初始化系统，创建第一个任务，启动操作系统。<br>
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146574429839.png" alt="5.15"><br>
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/14657443004.png" alt="5.16">
+TIM_Init函数配置外置定时器，GPIO_Init函数配置两个GPIO口，由于不会产生中断，因此可以在操作系统启动前配置。<br>
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146574430239.png" alt="5.17">
+Display_Init函数初始化数码管使用到的GPIO口，DHT11_output与DHT11_input控制DHT11数据口的属性，在数据读取中会使用到。<br>
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146574430439.png" alt="5.18"><br>
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146574430737.png" alt="5.19"><br>
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/14657443104.png" alt="5.20"><br>
+定时器回调函数负责读取DHT11的数据。  </p>
+
+<p>stm32f1xx_it.c<br>
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146574431239.png" alt="5.21">
+配置外部定时器的中断处理函数，使其进入操作系统的中断嵌套。  </p>
 </li>
 </ul>
-
-<p>os_cpu_a.asm 对底层汇编做一些修改，主要是由于汇编标准不同的缘故。  </p>
-
-<p>os_cpu_c.c 注释掉一些与之前注释的系统时钟相关的宏定义。  </p>
-
-<p>os_cfg.h 内核裁剪。  </p>
-
-<p>stm32f1xx_it.c 配置操作系统时钟中断。  </p>
-
-<p>startup_stm32f103xb.s 把stm32的pendSV中断连接到操作系统上去。  </p>
-
-<pre><code>* 用户代码
-</code></pre>
-
-<p>includes.h 用户函数的头文件集合。  </p>
-
-<p>app_cfg.h 用户函数堆栈、优先级定义。  </p>
-
-<p>app.h 用户函数定义。  </p>
-
-<p>app.c 用户函数。  </p>
-
-<p>由于在操作系统中，中断的响应会导致操作系统的中断嵌套，因此会产生中断的资源需要在操作系统启动之后、相关任务启动之前配置。Task_start是初始任务，DHT11_Display负责温湿度传感器数据在数码管上的显示。同时，DHT11的数据读取需要至少精确到20us左右的时间控制，如果使用操作系统自身的时钟或者是任务切换，都不能保证实时性，因此，我使用外部定时器中断来控制数据的读取。  </p>
-
-<pre><code>* main.c 操作系统启动，中断响应函数，资源配置函数。  
-</code></pre>
-
-<p>main函数负责做初始的资源配置，例如系统时钟等，然后初始化系统，创建第一个任务，启动操作系统。  </p>
-
-<p>TIM_Init函数配置外置定时器，GPIO_Init函数配置两个GPIO口，由于不会产生中断，因此可以在操作系统启动前配置。  </p>
-
-<p>Display_Init函数初始化数码管使用到的GPIO口，DHT11_output与DHT11_input控制DHT11数据口的属性，在数据读取中会使用到。  </p>
-
-<p>定时器回调函数负责读取DHT11的数据。  </p>
-
-<p>stm32f1xx_it.c  </p>
-
-<p>配置外部定时器的中断处理函数，使其进入操作系统的中断嵌套。  </p>
 
 <h2>
 <a id="嵌入式实验六" class="anchor" href="#%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AE%9E%E9%AA%8C%E5%85%AD" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>嵌入式实验六</h2>
@@ -898,37 +919,42 @@ USB-TTL串口线一根（FT232RL芯片或PL2303芯片）；<br>
 <p>实验过程记录  </p>
 
 <ul>
-<li><p>从git上下载树莓派相关的linux源代码与编译工具  </p></li>
-<li><p>修改内核源代码，添加系统调用<br>
-在/arch/arm/kernel/call.S中添加系统跳转位置  </p></li>
+<li>从git上下载树莓派相关的linux源代码与编译工具<br>
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146580654325.png" alt="6.1">
+</li>
+<li>修改内核源代码，添加系统调用<br>
+在/arch/arm/kernel/call.S中添加系统跳转位置
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146580654371.png" alt="6.2">
+在这里，我们把新的系统调用添加到最后面，位于第403行。<br>
+</li>
 </ul>
 </li>
 </ul>
 
-<p>在这里，我们把新的系统调用添加到最后面，位于第403行。  </p>
+<p>在/arch/arm/include/uapi/asm/unistd.h中设置新增系统调用的位置（即该系统调用在系统调用表中的位置）<br>
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146580654414.png" alt="6.3">
+我们将新增的系统调用添加在第420行。  </p>
 
-<p>在/arch/arm/include/uapi/asm/unistd.h中设置新增系统调用的位置（即该系统调用在系统调用表中的位置）  </p>
+<p>在源代码中添加新的系统调用的实现函数：<br>
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/14658065445.png" alt="6.4">
+可以看到新增的系统调用仅仅是在系统日志中打印被调用的信息。  </p>
 
-<p>我们将新增的系统调用添加在第420行。  </p>
+<p>最后，在/include/linux/syscall.h中添加新增的系统调用的声明。<br>
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146580654488.png" alt="6.5">
+新增系统调用的定义被添加在892行。  </p>
 
-<p>在源代码中添加新的系统调用的实现函数：  </p>
+<p>编译系统并装入sd卡中<br>
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146580654527.png" alt="6.6"><br>
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146580654561.png" alt="6.7"><br>
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/1465806546.png" alt="6.8"><br>
+验证新增的系统调用  </p>
 
-<p>可以看到新增的系统调用仅仅是在系统日志中打印被调用的信息。  </p>
-
-<p>最后，在/include/linux/syscall.h中添加新增的系统调用的声明。  </p>
-
-<p>新增系统调用的定义被添加在892行。  </p>
-
-<p>编译系统并装入sd卡中  </p>
-
-<p>验证新增的系统调用  </p>
-
-<p>编写以下用户程序，分别使用c语言syscall函数和汇编代码调用新增的系统调用。  </p>
-
-<p>使用syscall函数调用直接将调用号以及相关的参数作为syscall的参数即可。使用汇编调用则是将系统调用号放在r7寄存器上，将参数放在r0及之后的寄存器中。需要注意的是，对于较大的立即数，mov可能会无法通过汇编，使用ldr即可。<br>
-编译运行之后，可以在系统日志中看到如下输出：  </p>
-
-<p>可见新增的系统调用已经被成功调用。  </p>
+<p>编写以下用户程序，分别使用c语言syscall函数和汇编代码调用新增的系统调用。<br>
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146580654637.png" alt="6.9">
+使用syscall函数调用直接将调用号以及相关的参数作为syscall的参数即可。使用汇编调用则是将系统调用号放在r7寄存器上，将参数放在r0及之后的寄存器中。需要注意的是，对于较大的立即数，mov可能会无法通过汇编，使用ldr即可。<br>
+编译运行之后，可以在系统日志中看到如下输出：<br>
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146580654675.png" alt="6.10">
+可见新增的系统调用已经被成功调用。  </p>
 
 <p>与x86相比，添加系统调用的步骤都是相同的，不同之处在于具体文件的位置不同，以及设计到与汇编相关的系统调用表的修改，由于不同的平台汇编代码格式的不同，因此这部分的代码区别较大。  </p>
 
@@ -966,29 +992,32 @@ USB-TTL串口线一根（FT232RL芯片或PL2303芯片）；<br>
 Fritzing。
 ####三 实验过程和数据记录<br>
 首先将led矩阵显示器与树莓派连接，使用5v供电，然后将data、cs、clk分别接到没有使用的gpio口上:<br>
-</li>
-</ul>
-
-<p>编写设备驱动程序：<br>
-相关定义：  </p>
-
-<p>Data_pin表示数据gpio的接口号<br>
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146580686297.jpg" alt="7.1">
+编写设备驱动程序：<br>
+相关定义：<br>
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146580686408.png" alt="7.2">
+Data_pin表示数据gpio的接口号<br>
 Clk_pin表示时钟gpio的接口号<br>
 Cs_pin表示片选gpio的接口号<br>
 DECODE_MOD、INTENSITY、SCAN_LIMIT、SHUTDOWN、DISPLAY_TEST分别是led显示矩阵的功能寄存器地址<br>
 BUFFERSIZE是字符设备缓冲区的大小<br>
-相关结构：  </p>
-
-<p>驱动相关函数（更多部分请参看LEDdriver.c）  </p>
-
-<p>编写makefile文件（交叉编译）：  </p>
-
-<p>编写驱动测试程序：  </p>
-
-<p>可以看到，在打开文件的时候，使用的是非阻塞的方式，因此写入之后函数将会马上返回，而写入的字符将会在驱动程序的缓冲区中，每500ms显示一个字符。<br>
+相关结构：<br>
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146580686446.png" alt="7.3">
+驱动相关函数（更多部分请参看LEDdriver.c）<br>
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/14658068649.png" alt="7.4"><br>
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146580686531.png" alt="7.5"><br>
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146580686573.png" alt="7.6"><br>
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146580686619.png" alt="7.7">
+编写makefile文件（交叉编译）：<br>
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146580686653.png" alt="7.8">
+编写驱动测试程序：<br>
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146580686693.png" alt="7.9">
+可以看到，在打开文件的时候，使用的是非阻塞的方式，因此写入之后函数将会马上返回，而写入的字符将会在驱动程序的缓冲区中，每500ms显示一个字符。<br>
 装载驱动，运行测试程序，运行过程请见视频:<br>
 视频地址：<a href="http://v.youku.com/v_show/id_XMTU5MTAzOTY5Ng==.html">http://v.youku.com/v_show/id_XMTU5MTAzOTY5Ng==.html</a><br>
-密码：3134113  </p>
+密码：3134113<br>
+</li>
+</ul>
 
 <h2>
 <a id="嵌入式系统实验八" class="anchor" href="#%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E5%AE%9E%E9%AA%8C%E5%85%AB" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>嵌入式系统实验八</h2>
@@ -1031,27 +1060,20 @@ USB-TTL串口线一根（FT232RL芯片或PL2303芯片）；<br>
 <li>用telnet连接Linux板卡，发送字符串来显示。<br>
 #### 四 代码分析<br>
 Telnetserver代码如下：<br>
-</li>
-</ul>
-
-<p>代码中使用多线程来对矩阵显示器进行写入，主线程监听tcp连接，接收数据之后写入同步的queue中，同时子线程监听queue，当有数据到达时，就将其写入矩阵显示器中。退出命令为“ExIT”，当客户端输入ExIT时，子线程将会退出，主线程在收到子线程退出的信息之后也会退出。  </p>
-
-<h4>
-<a id="五-实验结果" class="anchor" href="#%E4%BA%94-%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>五 实验结果</h4>
-
-<p>实验过程视频请见：<br>
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146580705827.png" alt="8.1"><br>
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146580705875.png" alt="8.2"><br>
+<img src="http://cfgwu.img48.wal8.com/img48/549504_20160612201041/146580705909.png" alt="8.3">
+代码中使用多线程来对矩阵显示器进行写入，主线程监听tcp连接，接收数据之后写入同步的queue中，同时子线程监听queue，当有数据到达时，就将其写入矩阵显示器中。退出命令为“ExIT”，当客户端输入ExIT时，子线程将会退出，主线程在收到子线程退出的信息之后也会退出。<br>
+#### 五 实验结果<br>
+实验过程视频请见：<br>
 <a href="http://v.youku.com/v_show/id_XMTYwMDE3NTgxMg==.html">http://v.youku.com/v_show/id_XMTYwMDE3NTgxMg==.html</a>
 密码：<br>
-3134113</p>
+3134113</li>
+</ul>
+      </section>
 
-      <footer class="site-footer">
-        <span class="site-footer-owner"><a href="https://github.com/zyclincoln/LearnEmbeddedSystem">Learnembeddedsystem</a> is maintained by <a href="https://github.com/zyclincoln">zyclincoln</a>.</span>
-
-        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
-      </footer>
-
-    </section>
-
-  
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
   </body>
 </html>
